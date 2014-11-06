@@ -40,7 +40,7 @@ class Event extends AppModel {
 				'message' => 'Between 5 to 50 characters'
 			),
 		),
-		//別でバリデーションする必要あり	
+		//EventControllerでValidation	
 		'event_date' => array(
 			'datetime' => array(
 				'rule' => array('notEmpty'
@@ -117,11 +117,6 @@ class Event extends AppModel {
 		'status' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);

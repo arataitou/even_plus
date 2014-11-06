@@ -30,17 +30,16 @@
 		echo $this->fetch('script');
 	?>
 
-
 	<?php 
 		// 11/04KS追記
 		//Topのロゴ (/even_plus/top/index) へLink
 		echo '<a href='.'/even_plus/top/index'.'><h1>'."Even+".'</h1></a>';
 
-		//Button表示各ページへのLink
-		echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
+		//Bottum表示各ページへのLink
+		echo $this->Html->link('Mypage', '/users/view', array('class'=>'button'));
 		echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
 		echo $this->Html->link('Login', '/users/login', array('class'=>'button'));
-		echo $this->Html->link('Signup', '/users/Signup', array('class'=>'button'));
+		echo $this->Html->link('Signup', '/users/signup', array('class'=>'button'));
 		echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
 		echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
 
@@ -49,8 +48,6 @@
 <body>
 	<div id="container">
 		<div id="header">
-
-
 		</div>
 		<div id="content">
 
@@ -62,7 +59,6 @@
 
 
 			<?php 
-
 				echo $this->Html->link('Home', '/tops/index', array('class'=>'button'));
 			?>
 

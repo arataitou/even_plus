@@ -31,5 +31,29 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-    public $components = array('DebugKit.Toolbar');
+
+	//Html,From,Session機能を使う為、登録する。
+    public $helpers = array('Html', 'Form', 'Session');
+    //public $components = array('DebugKit.Toolbar');
+
+
+
+
+    // Login,Logoutの認証
+    // LoginとLogoutのactionが実行された後に読み込まれるURLを設定
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            //仮でUser/indexにLink　本来はtops/index
+            'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
+            //仮でUser/indexにLink　本来はusers/logout
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'index')
+        )
+    );
+
+    //AuthComponentに全てのコントローラの index と view アクションでログインを必要としないように伝えました。 
+    public function beforeFilter() {
+        $this->Auth->allow('index', 'view','signup');
+    }
+
 }

@@ -14,7 +14,13 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+	public $components = array('Paginator', 'Session','Auth');
+	
+	public function beforeFilter() {
+		parent::beforeFilter();
+    	// ユーザー自身による登録とログアウトを許可する
+    	$this->Auth->allow('signup', 'logout');
+	}
 
 /**
  * index method
@@ -46,7 +52,8 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function add() {
+
+	public function signup() {
 		if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -57,6 +64,7 @@ class UsersController extends AppController {
 			}
 		}
 	}
+
 
 /**
  * edit method
@@ -102,4 +110,21 @@ class UsersController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
+
+
+
+	public function login() {
+    	if ($this->request->is('post')) {
+        	if ($this->Auth->login()) {
+            	$this->redirect($this->Auth->redirect());
+        	} else {
+            	$this->Session->setFlash(__('Invalid username or password, try again'));
+        	}
+    	}
+	}
+
+	public function logout() {
+    	$this->redirect($this->Auth->logout());
+	}
+
 }

@@ -48,8 +48,7 @@
         echo $this->Form->input('event_price',array('type' => 'text','placeholder' => '0php〜800php'));
         echo $this->Form->input('category_id');
         echo $this->Form->input('event_detail',array('rows' => 5,
-            'placeholder' => 'イベント詳細を入力してくだしてください(英訳)
-            '));
+            'placeholder' => 'イベント詳細を入力してくだしてください(英訳)'));
         echo $this->Form->input('question_1',array('placeholder' => '質問1を入力してください。'));
 		echo $this->Form->input('question_2',array('placeholder' => '質問2を入力してください。'));
 		echo $this->Form->input('question_3',array('placeholder' => '質問3を入力してください。'));

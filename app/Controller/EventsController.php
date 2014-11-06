@@ -64,33 +64,38 @@ class EventsController extends AppController {
         );
 
         if ($this->request->is('post')) {
-            $data = array(
-                "event_title" => $_POST["data"]["Event"]["event_title"],
-                "event_date" => array(
-                    "month" => $_POST["data"]["Event"]["month"],
-                    "day" => $_POST["data"]["Event"]["day"],
-                    "year" => $_POST["data"]["Event"]["year"],
-                    "hour" => $_POST["data"]["Event"]["hour"],
-                    "min" => $_POST["data"]["Event"]["min"],
-                    "meridian" => $_POST["data"]["Event"]["meridian"]
-                    ),
-                "area_id" => $_POST["data"]["Event"]["area_id"],
-                "event_place" => $_POST["data"]["Event"]["event_place"],
-                "event_address" => $_POST["data"]["Event"]["event_address"],
-                "event_price" => $_POST["data"]["Event"]["event_price"],
-                "category_id" => $_POST["data"]["Event"]["category_id"],
-                "event_detail" => $_POST["data"]["Event"]["event_detail"],
-                "question_1" => $_POST["data"]["Event"]["question_1"],
-                "question_2" => $_POST["data"]["Event"]["question_2"],
-                "question_3" => $_POST["data"]["Event"]["question_3"]
-            );
-			$this->Event->create();
-			if ($this->Event->save($data)) {
-
-				$this->Session->setFlash(__('The event has been saved.'));
-                return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
+            if ($_POST["data"]["Event"]["month"] == null || $_POST["data"]["Event"]["day"] == null || $_POST["data"]["Event"]["year"] == null || $_POST["data"]["Event"]["hour"] == null || $_POST["data"]["Event"]["min"] == null || $_POST["data"]["Event"]["meridian"] = null
+                ) {
+                $this->Session->setFlash(__('日時をすべて選択してください'));//日時のValidation
+            }else{
+                //データベースに送る配列を形成
+                $data = array(
+                    "event_title" => $_POST["data"]["Event"]["event_title"],
+                    "event_date" => array(
+                        "month" => $_POST["data"]["Event"]["month"],
+                        "day" => $_POST["data"]["Event"]["day"],
+                        "year" => $_POST["data"]["Event"]["year"],
+                        "hour" => $_POST["data"]["Event"]["hour"],
+                        "min" => $_POST["data"]["Event"]["min"],
+                        "meridian" => $_POST["data"]["Event"]["meridian"]
+                        ),
+                    "area_id" => $_POST["data"]["Event"]["area_id"],
+                    "event_place" => $_POST["data"]["Event"]["event_place"],
+                    "event_address" => $_POST["data"]["Event"]["event_address"],
+                    "event_price" => $_POST["data"]["Event"]["event_price"],
+                    "category_id" => $_POST["data"]["Event"]["category_id"],
+                    "event_detail" => $_POST["data"]["Event"]["event_detail"],
+                    "question_1" => $_POST["data"]["Event"]["question_1"],
+                    "question_2" => $_POST["data"]["Event"]["question_2"],
+                    "question_3" => $_POST["data"]["Event"]["question_3"]
+                    );
+    			$this->Event->create();
+    			if ($this->Event->save($data)) {
+    				$this->Session->setFlash(__('The event has been saved.'));
+                    return $this->redirect(array('action' => 'index'));
+    			} else {
+    				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
+                }
 			}
 		}
         
@@ -140,30 +145,5 @@ class EventsController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
     }
-
-    public function date_limit(){
-       
-       
-        $date_limited = $_POST["data"]["Event"]["month"].'/'.$_POST["data"]["Event"]["date"].'/'.$_POST["data"]["Event"].' '.$_POST["data"]["Event"]["hour"].':'.$_POST["data"]["Event"]["minute"].' '.$_POST["data"]["Event"]['noon'];
-
-
-        $_POST["data"]["Event"] = array(
-            "event_title" => $_POST ["data"]["Event"]["event_title"],
-            "month" => $_POST ["data"]["Event"]["month"],
-            "event_date" => $date_limited,
-            "area_id" => $_POST ["data"]["Event"]["area_id"],
-            "event_place" => $_POST ["data"]["Event"]["event_place"],
-            "event_address" => $_POST ["data"]["Event"]["event_address"],
-            "event_price" => $_POST ["data"]["Event"]["event_price"],
-            "category_id" => $_POST ["data"]["Event"]["category_id"],
-            "event_detail" => $_POST ["data"]["Event"]["event_detail"],
-            "question_1" => $_POST ["data"]["Event"] ["question_1"],
-            "question_2" => $_POST ["data"]["Event"] ["question_2"],
-            "question_1" => $_POST ["data"]["Event"] ["question_3"]
-            );
-        
-        return $this->redirect(array('action' => 'add'));
         
     }
-         
-}

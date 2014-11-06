@@ -82,7 +82,7 @@ class EventsController extends AppController {
                 "event_detail" => $_POST["data"]["Event"]["event_detail"],
                 "question_1" => $_POST["data"]["Event"]["question_1"],
                 "question_2" => $_POST["data"]["Event"]["question_2"],
-                "question_1" => $_POST["data"]["Event"]["question_3"]
+                "question_3" => $_POST["data"]["Event"]["question_3"]
             );
 			$this->Event->create();
 			if ($this->Event->save($data)) {

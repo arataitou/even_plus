@@ -5,7 +5,7 @@ App::uses('AppModel', 'Model');
  *
  */
 class Event extends AppModel {
-
+    
 /**
  * Validation rules
  *
@@ -54,7 +54,7 @@ class Event extends AppModel {
 		),
 		'event_date' => array(
 			'datetime' => array(
-				'rule' => array('datetime'),
+				'rule' => array('notEmpty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -83,15 +83,12 @@ class Event extends AppModel {
 			),
 		),
 		'event_price' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+			'naturalNumber' => array(
+                'rule'    => array( 'range', -1, 801),  
+                'message' => 'Please enter a number between 0 and 800',
+            ),
+        ),
+
 		'event_detail' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
@@ -144,3 +141,4 @@ class Event extends AppModel {
 		),
 	);
 }
+

@@ -31,5 +31,9 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	//Html,From,Session機能を使う為、登録する。
+    public $helpers = array('Html', 'Form', 'Session');
     public $components = array('DebugKit.Toolbar');
+
 }

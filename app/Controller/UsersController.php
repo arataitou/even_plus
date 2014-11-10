@@ -14,12 +14,12 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session','Auth');
+	public $components = array('Paginator', 'Session');
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
     	// ユーザー自身による登録とログアウトを許可する
-    	$this->Auth->allow('signup', 'logout');
+    	$this->Auth->allow('signup','logout');
 	}
 
 /**
@@ -54,11 +54,11 @@ class UsersController extends AppController {
  */
 
 	public function signup() {
-		if ($this->request->is('post')) {
+        if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
 			}

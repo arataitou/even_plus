@@ -1,54 +1,61 @@
 <div class="events view">
-<h2><?php echo __('Event'); ?></h2>
+     <?php debug($event); ?>
+		
+	<h2><?php echo h($event['Event']['event_title']); ?></h2>
+	&nbsp;
+    <h3><?php echo __('Event Plan'); ?></h3>
 	<dl>
-		<dt><?php echo __('Id'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('User Id'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['user_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Category Id'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['category_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Area Id'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['area_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Event Title'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['event_title']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Event Img'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['event_img']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Event Date'); ?></dt>
+		<dt><?php echo __('Date'); ?></dt>
 		<dd>
 			<?php echo h($event['Event']['event_date']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Event Place'); ?></dt>
+		<dt><?php echo __('Area'); ?></dt>
+		<dd>
+			<?php echo h($event['Area']['area_name']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Place'); ?></dt>
 		<dd>
 			<?php echo h($event['Event']['event_place']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Event Address'); ?></dt>
+		<dt><?php echo __('Address'); ?></dt>
 		<dd>
 			<?php echo h($event['Event']['event_address']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Event Price'); ?></dt>
+		<dt><?php echo __('Price'); ?></dt>
 		<dd>
 			<?php echo h($event['Event']['event_price']); ?>
+			&nbsp;
+		</dd>
+		<dt><?php echo __('Category'); ?></dt>
+		<dd>
+			<?php echo h($event['Category']['category_title']); ?>
+			&nbsp;
+		</dd>
+    </dl>
+&nbsp;
+    <h3><?php echo __('Event Detail'); ?></h3>
+    <h4><?php echo h($event['Event']['event_detail']); ?></h4>
+    <h3><?php echo __('Q1 ').$event['Event']['question_1']; ?></h3>
+&nbsp;
+    <h3><?php echo __('Q2 ').$event['Event']['question_2']; ?></h3>
+&nbsp;
+    <h3><?php echo __('Q3 ').$event['Event']['question_3']; ?></h3>
+&nbsp;
+    <h3><?php echo __('Participants List') ?></h3>
+    <!--ここにparticipantsテーブルからlistを表示するなり⇒つまりモデルから-->
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+    <dl>
+		<dt><?php echo __('User Id'); ?></dt>
+		<dd>
+			<?php echo h($event['Event']['user_id']); ?>
 			&nbsp;
 		</dd>
 		<dt><?php echo __('Event Detail'); ?></dt>
@@ -71,29 +78,28 @@
 			<?php echo h($event['Event']['question_3']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Created'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Modified'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['modified']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Status'); ?></dt>
 		<dd>
 			<?php echo h($event['Event']['status']); ?>
 			&nbsp;
 		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Event'), array('action' => 'edit', $event['Event']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), array(), __('Are you sure you want to delete # %s?', $event['Event']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Events'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Event'), array('action' => 'add')); ?> </li>
+    </dl>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+
+    <ul>
+<!--ログイン済みのユーザーのみ参加ボタン表示-->
+        <?php if ($userId){ 
+            echo '<li>'.$this->Html->link(__('Join Event'), array('action' => 'join')).'</li>'; 
+            }
+        ?>
+<!--管理者とイベント作成者のみ以下の処理が表示-->
+        <?php if ($flagUd){
+            echo '<li>'.$this->Html->link(__('Edit Event'), array('action' => 'edit', $event['Event']['id'])).'</li>';
+            echo '<li>'.$this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), array(), __('Are you sure you want to delete # %s?', $event['Event']['id'])).'</li>';
+            }
+        ?>
 	</ul>
 </div>

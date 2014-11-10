@@ -5,6 +5,24 @@ App::uses('AppModel', 'Model');
  *
  */
 class Event extends AppModel {
+   public $belongsTo = array(
+        'Area' => array(
+            'classname' => 'Area',
+            'foeignKey' => 'area_name',
+            'type' => 'left'
+        ),
+        'Category' => array(
+            'classname' => 'Category',
+            'foeignKey' => 'category_aid',
+            'type' => 'left'
+        ),
+        'User' => array(
+            'classname' => 'User',
+            'foeignKey' => 'user_id',
+            'type' => 'left'
+        ),
+    ); 
+
 /**
  * Validation rules
  *

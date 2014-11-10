@@ -25,7 +25,7 @@ class EventsController extends AppController {
 	public function index() {
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
-	}
+    }
 
 /**
  * view method
@@ -37,11 +37,19 @@ class EventsController extends AppController {
 	public function view($id = null) {
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
-		}
+        }
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
-		$this->set('event', $this->Event->find('first', $options));
-	}
-
+        $this->set('event', $this->Event->find('first', $options));
+        /*
+        //login済みのユーザーで合った場合「参加ボタン」を表示するため、viewにuser_idをset
+        if ($userId = $this->Auth->user('id')){
+            $this->set('userId', $userId);
+            if ($userId == '1' || $this->Event->data["user_id"]){
+                $this->set('flagUd', "haveAuthority");
+            }
+        }
+         */
+    }
 /**
  * add method
  *
@@ -175,5 +183,8 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-        }
     }
+
+    public function join($id = null){
+    }
+}

@@ -14,7 +14,26 @@ class EventsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+    public $components = array('Paginator', 'Session');
+
+    //「認証」下記一文を追加
+/////////////////////////////////////////////////////////
+    public function isAuthorized($user){
+        //登録済みユーザは投稿できる。
+        if($this->action ==='add'){
+            return true;
+        }
+
+        //投稿のオーナーは編集や削除ができる。
+        if(in_array($this->action,array('edit','delete'))){
+            $eventId = (int)$this->request->params['pass'][0];
+            if($this->Event->isOwnedBy($eventId,$user['id'])){
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+    }
+//////////////////////////////////////////////////////////
 
 /**
  * index method
@@ -47,8 +66,10 @@ class EventsController extends AppController {
  * @return void
  */
 	public function add() {
-		if ($this->request->is('post')) {
-			$this->Event->create();
+        if ($this->request->is('post')) {
+            //下記一文を追加
+            $this->request->data['Event']['user_id'] = $this->Auth->user('id');
+		//	$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
 				return $this->redirect(array('action' => 'index'));

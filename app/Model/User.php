@@ -19,7 +19,17 @@ class User extends AppModel {
     
 	//public $displayField = 'name';
 
+    //ユーザーが保存されるときは毎回 SimplePasswordHasher 
+    //クラスを用いてパスワードがハッシュ化されます。
+    public function beforeSave($options = array()){
+        if(isset($this->data[$this->alias]['password'])){
+            $passwordHasher = new SimplePasswordHasher();
+            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
+        }
+        return true;
+    }
 
+    
 
     public $validate = array(
         'name' => array(
@@ -36,15 +46,7 @@ class User extends AppModel {
         )
     );
     
-    //ユーザーが保存されるときは毎回 SimplePasswordHasher 
-    //クラスを用いてパスワードがハッシュ化されます。
-    public function beforeSave($options = array()){
-        if(isset($this->data[$this->alias]['password'])){
-            $passwordHasher = new SimplePasswordHasher();
-            $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
-        }
-        return true;
-    }
+
 
 
 

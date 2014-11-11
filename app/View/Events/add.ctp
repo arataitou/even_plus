@@ -17,6 +17,7 @@
 		echo $this->Form->input('question_2');
 		echo $this->Form->input('question_3');
 		echo $this->Form->input('status');
+
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

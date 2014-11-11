@@ -49,34 +49,29 @@ class AppController extends Controller {
                     'fields' => array('username' => 'name', 'password' => 'password')
                 )
             ),
-            //仮でUser/indexにLink本来はtops/index
-            'loginRedirect' => array('controller' => 'users', 'action' => 'index'),
-            //仮でUser/indexにLink本来はusers/logout
-            'logoutRedirect' => array('controller' => 'users', 'action' => 'index'),
-/////////////////////////////////////
-            //「認証」この一文を追加
+            'loginRedirect' => array('controller' => 'tops', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'logout'),
+            //ユーザ認証部
             'authorize'=> array('Controller')
-////////////////////////////////////
         )
     );
-//////////////////////////////////////////////
-            //認証下記文を追加
+
+
+    //ユーザ制限
     public function isAuthorized($user) {
-        if(isset($user['role']) && $user['role'] ==='admin'){
+        //group_id=1はadmin
+        if(isset($user['group_id']) && $user['group_id'] ==='1'){
           return true;
        }
        //デフォルトは拒否
        return false;
    }
 
-    /////////////////////////////////////////////////
 
 
-
-
-    //AuthComponentに全てのコントローラの index と view アクションでログインを必要としないように伝えました。 
+    //AuthComponentに全てのコントローラの index と viewとsignup アクションでログインを必要としないように設定。
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view','signup');
+        $this->Auth->allow('index', 'view','signup','logout');
     }
 
 }

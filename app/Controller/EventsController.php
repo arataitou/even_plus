@@ -16,8 +16,9 @@ class EventsController extends AppController {
  */
     public $components = array('Paginator', 'Session');
 
-    //「認証」下記一文を追加
-/////////////////////////////////////////////////////////
+
+
+    //ユーザ制限
     public function isAuthorized($user){
         //登録済みユーザは投稿できる。
         if($this->action ==='add'){
@@ -33,7 +34,8 @@ class EventsController extends AppController {
         }
         return parent::isAuthorized($user);
     }
-//////////////////////////////////////////////////////////
+
+
 
 /**
  * index method
@@ -72,11 +74,13 @@ class EventsController extends AppController {
 		//	$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
-				return $this->redirect(array('action' => 'index'));
 			} else {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
 			}
-		}
+        }
+
+    $auth = $this->Auth->user('id');
+        $this->set('auth', $auth);
 	}
 
 /**

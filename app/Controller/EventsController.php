@@ -8,24 +8,46 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+     public $uses = array('Event','Category','Area');
+     public $helpers = array('Paginator');
+     public $components = array('Session','Paginator');
+     //Pagenatorの設定
+     public $paginate = array(
+     //モデルの指定
+     'Event' => array(
+     //ページに表示する数
+     'limit' => 3,
+     //並び順
+     'order' => array('created' => 'asc'),
+     ));
 
-/**
- * Components
- *
- * @var array
- */
-	public $components = array('Paginator', 'Session');
+	public function index($id = null){
+        
+        $param_id = $id;
+        $ord = array(
+                  'order' => 'event_date asc',
+                  'limit' => 4,
+                );
+        $eventList = $this->Event->find('all',$ord);
+		$this->set('events', $eventList);
 
-/**
- * index method
- *
- * @return void
- */
-	public function index() {
-		$this->Event->recursive = 0;
-		$this->set('events', $this->Paginator->paginate());
-	}
+        //日付ソートのデータ
+        $today_date = $this->Event->getEventsWithToday();
+        $this->set('today',$today_date);
+        
+        $tomorrow_date = $this->Event->getEventsWithTomorrow();
+        $this->set('tomorrow',$tomorrow_date);
+        
+        $this->Paginator->settings = $this->paginate;
+        $data = $this->Paginator->paginate('Event');
+        $this->set(compact('data'));
+
+        $type = $this->params['named']['type'];
+        $this->set('types',$type);
+
+        }
+    
+    
 
 /**
  * view method
@@ -175,5 +197,5 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-        }
-    }
+	}
+}

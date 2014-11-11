@@ -32,14 +32,15 @@ class Area extends AppModel {
  *
  * @var array
  */
-	public $hasMany = array(
-		'Event' => array(
-			'className' => 'Event',
+
+      /*array(
+		'Area' => array(
+			'className' => 'Area',
 			'foreignKey' => 'area_id',
 			'dependent' => false,
-			'conditions' => '',
+			'conditions' => 'array()',
 			'fields' => '',
-			'order' => '',
+			'order' => 'Area area_id ASC',
 			'limit' => '',
 			'offset' => '',
 			'exclusive' => '',
@@ -47,5 +48,5 @@ class Area extends AppModel {
 			'counterQuery' => ''
 		)
 	);
-
+   */
 }

@@ -33,6 +33,7 @@
  */
 //	Configure::write('debug', 2);
     Configure::write('debug', 1);
+
 /**
  * Configure the Error handler used to handle errors for your application. By default
  * ErrorHandler::handleError() is used. It will display errors using Debugger, when debug > 0
@@ -227,7 +228,7 @@
 /**
  * A random numeric string (digits only) used to encrypt/decrypt strings.
  */
-	Configure::write('Security.cipherSeed', 'a7c55a44e6239e3fae7a5dbd3a5dcafbeaee6c75');    
+	Configure::write('Security.cipherSeed', 'a7c55a44e6239e3fae7a5dbd3a5dcafbeaee6c75');
 
 /**
  * Apply timestamps with the last modified time to static assets (js, css, images).

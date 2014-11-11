@@ -10,7 +10,59 @@ class Event extends AppModel {
  *
  * @var array
  */
-	public $validate = array(
+    /*public function beforeFind($queryData) {
+        $queryData = parent::beforeFind($queryData);
+        $queryData['order'][] = 'event_date';
+        return $queryData;
+    }
+
+    public function Order()
+    {
+        $posts = array();
+        $order = array('Event.event_date ASC');
+        $posts = $this->find('all',array('order' => $order));
+        return $posts;
+
+        }*/
+    public $name ='Event';
+    public $belongsTo = array(
+           'Area' => array(
+                 'className' => 'Area',
+                 'foreignKey' => 'area_id',
+                 'order' => 'Area.id ASC'
+                 ),
+           'Category' => array(
+                 'className' => 'Category',
+                 'foreignKey' => 'category_id',
+                 'order' => 'Category.id ASC'
+                 
+           ));
+    
+     public function getEventsWithToday(){
+        $today = date("Y-m-d");
+        
+        // データの取得
+        $TODAY = $this->find('all',array('conditions' =>
+                      array('event_date LIKE?' => '%'.$today.'%')));
+        //取得したデータを返却
+        return $TODAY;
+         
+
+        }
+
+     public function getEventsWithTomorrow(){
+        $tomorrow = date("Y-m-d", strtotime("+1 day"));
+       
+        // データの取得
+        $TOMORROW = $this->find('all',array('conditions' => array('event_date LIKE?' => '%'.$tomorrow.'%')));
+        //取得したデータを返却
+        return $TOMORROW;
+        }
+
+    
+
+
+   	public $validate = array(
 		'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),

@@ -120,11 +120,12 @@ class UsersController extends AppController {
         	} else {
             	$this->Session->setFlash(__('Invalid username or password, try again'));
         	}
-    	}
+        }
 	}
 
-	public function logout() {
-    	$this->redirect($this->Auth->logout());
-	}
-
+    public function logout() {
+        if($this->Auth->login()){
+        	$this->redirect($this->Auth->logout());
+	    }
+    }
 }

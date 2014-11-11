@@ -17,8 +17,9 @@ class EventsController extends AppController {
  */
     public $components = array('Paginator', 'Session');
 
-    //「認証」下記一文を追加
-/////////////////////////////////////////////////////////
+
+
+    //ユーザ制限
     public function isAuthorized($user){
         //登録済みユーザは投稿できる。
         if($this->action ==='add'){
@@ -34,7 +35,8 @@ class EventsController extends AppController {
         }
         return parent::isAuthorized($user);
     }
-//////////////////////////////////////////////////////////
+
+
 
 /**
  * index method

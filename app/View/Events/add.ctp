@@ -2,7 +2,6 @@
 <?php echo $this->Form->create('Event'); ?>
 	<fieldset>
 		<legend><?php echo __('Add Event'); ?></legend>
-
 <?php
         echo $this->Form->input('event_title',array('placeholder'=>'入力してください(英訳)'));
 

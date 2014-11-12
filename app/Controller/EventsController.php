@@ -43,7 +43,12 @@ class EventsController extends AppController {
  *
  * @return void
  */
-	public function index() {
+    public function index() {
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
 	}

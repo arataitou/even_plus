@@ -40,7 +40,7 @@
          if(isset($status['id']) && ($status['group_id']=1)){
 
 		    //Bottum表示各ページへのLink
-		    echo $this->Html->link('Mypage', '/users/view', array('class'=>'button'));
+		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
 		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
             echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
@@ -48,7 +48,7 @@
          }
         if(isset($status['id']) && ($status['group_id']=0)){
 
-		    echo $this->Html->link('Mypage', '/users/view', array('class'=>'button'));
+		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
 		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
 		    echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));

@@ -9,6 +9,7 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
+
 /**
  * Components
  *
@@ -20,7 +21,8 @@ class UsersController extends AppController {
 		parent::beforeFilter();
     	// ユーザー自身による登録とログアウトを許可する
     	$this->Auth->allow('signup','logout');
-	}
+    }
+
 
 /**
  * index method
@@ -29,7 +31,11 @@ class UsersController extends AppController {
  */
 	public function index() {
 		$this->User->recursive = 0;
-		$this->set('users', $this->Paginator->paginate());
+        $this->set('users', $this->Paginator->paginate());
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
 	}
 
 /**
@@ -53,7 +59,12 @@ class UsersController extends AppController {
  * @return void
  */
 
-	public function signup() {
+    public function signup() {       
+       
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+
         if ($this->request->is('post')) {
 			$this->User->create();
 			if ($this->User->save($this->request->data)) {
@@ -113,7 +124,11 @@ class UsersController extends AppController {
 
 
 
-	public function login() {
+    public function login() {
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
     	if ($this->request->is('post')) {
         	if ($this->Auth->login()) {
             	$this->redirect($this->Auth->redirect());
@@ -121,11 +136,19 @@ class UsersController extends AppController {
             	$this->Session->setFlash(__('Invalid username or password, try again'));
         	}
         }
-	}
+    }
+
+
+
 
     public function logout() {
-        if($this->Auth->login()){
-        	$this->redirect($this->Auth->logout());
-	    }
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+        if(isset($status['id'])){
+            $this->redirect($this->Auth->logout());
+        }
     }
+
 }

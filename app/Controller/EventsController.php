@@ -42,7 +42,12 @@ class EventsController extends AppController {
  *
  * @return void
  */
-	public function index() {
+    public function index() {
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
 	}
@@ -67,11 +72,16 @@ class EventsController extends AppController {
  *
  * @return void
  */
-	public function add() {
+    public function add() {
+
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+
         if ($this->request->is('post')) {
             //下記一文を追加
             $this->request->data['Event']['user_id'] = $this->Auth->user('id');
-		//	$this->Event->create();
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
 			} else {
@@ -79,8 +89,6 @@ class EventsController extends AppController {
 			}
         }
 
-    $auth = $this->Auth->user('id');
-        $this->set('auth', $auth);
 	}
 
 /**

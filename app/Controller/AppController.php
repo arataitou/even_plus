@@ -50,7 +50,7 @@ class AppController extends Controller {
                 )
             ),
             'loginRedirect' => array('controller' => 'tops', 'action' => 'index'),
-            'logoutRedirect' => array('controller' => 'users', 'action' => 'logout'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
             //ユーザ認証部
             'authorize'=> array('Controller')
         )
@@ -69,9 +69,10 @@ class AppController extends Controller {
 
 
 
-    //AuthComponentに全てのコントローラの index と viewとsignup アクションでログインを必要としないように設定。
+    //AuthComponentに全てのコントローラの viewとsignup アクションでログインを必要としないように設定。
     public function beforeFilter() {
-        $this->Auth->allow('index', 'view','signup','logout');
+        $this->Auth->allow('view','signup');
     }
+
 
 }

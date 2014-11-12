@@ -2,7 +2,17 @@
 	<h2><?php echo __('Users'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<thead>
-	<tr>
+    <tr>
+
+    <fieldset>
+    
+        <?php  $labelName = (('ようこそ'),$status['name']);?>
+        <legend><?php echo __($labelName); ?></legend>
+<?php	
+?>
+    </fieldset>
+
+
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('password'); ?></th>

@@ -24,6 +24,23 @@ class UsersController extends AppController {
     }
 
 
+        //ユーザ制限
+    public function isAuthorized($user){
+        //登録済みユーザは投稿できる。
+        if(in_array($this->action,array('add','index'))){
+            return true;
+        }
+
+        //投稿のオーナーは編集や削除ができる。
+        if(in_array($this->action,array('edit','delete'))){
+            $userId = (int)$this->request->params['pass'][0];
+            if($this->User->isOwnedBy($userId,$user['id'])){
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+    }
+
 /**
  * index method
  *

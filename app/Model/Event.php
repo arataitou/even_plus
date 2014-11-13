@@ -37,6 +37,7 @@ class Event extends AppModel {
                  'order' => 'Category.id ASC'
                  
            ));
+
     
      public function getEventsWithToday(){
         $today = date("Y-m-d");
@@ -59,7 +60,32 @@ class Event extends AppModel {
         return $TOMORROW;
         }
 
-    
+    public function getEventsWithOneWeek(){
+          $start = date('Y-m-d');
+          $end =  date('Y-m-d',strtotime("+7 day"));    
+          $conditions = array(
+                    'Event.event_date >=' => $start,
+                    'Event.event_date <=' => $end
+          );
+          $order = array('Event.event_date' => 'asc');
+          $ONEWEEK = $this->find('all', compact('conditions','order'));
+          
+          return $ONEWEEK;
+        }
+    public function getEventsWithTwoWeeks(){
+          $start = date('Y-m-d');
+          $end =  date('Y-m-d',strtotime("+14 day"));    
+          $conditions = array(
+                    'Event.event_date >=' => $start,
+                    'Event.event_date <=' => $end
+          );
+          $order = array('Event.event_date' => 'asc');
+          $TWOWEEKS = $this->find('all', compact('conditions','order'));
+          
+          return $TWOWEEKS;
+        }
+
+        
 
 
    	public $validate = array(

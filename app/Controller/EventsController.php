@@ -21,15 +21,7 @@ class EventsController extends AppController {
      'order' => array('created' => 'asc'),
      ));
 
-	public function index($id = null){
-        
-        $param_id = $id;
-        $ord = array(
-                  'order' => 'event_date asc',
-                  'limit' => 4,
-                );
-        $eventList = $this->Event->find('all',$ord);
-		$this->set('events', $eventList);
+	public function index(){
 
         //日付ソートのデータ
         $today_date = $this->Event->getEventsWithToday();
@@ -38,10 +30,23 @@ class EventsController extends AppController {
         $tomorrow_date = $this->Event->getEventsWithTomorrow();
         $this->set('tomorrow',$tomorrow_date);
         
-        $this->Paginator->settings = $this->paginate;
+        $oneWeek_date = $this->Event->getEventsWithOneWeek();
+        $this->set('oneweek',$oneWeek_date);
+
+        $twoWeeks_date = $this->Event->getEventsWithTwoWeeks();
+        $this->set('twoweeks',$twoWeeks_date);
+
+        //$this->Paginator->settings = $this->paginate;
+        $start = date('Y-m-d');
+        $this->Paginator->settings = array(
+              'Event' => array(
+                     'order' => 'Event.event_date asc',
+                     'limit' => 3,
+                     'conditions' => array(
+                      'Event.event_date >=' => $start)));
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
-
+        
         $type = $this->params['named']['type'];
         $this->set('types',$type);
 

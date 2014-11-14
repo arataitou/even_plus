@@ -1,19 +1,25 @@
 <?php
 App::uses('AppController', 'Controller');
-
+/**
+ * Events Controller
+ *
+ * @property Event $Event
+ * @property PaginatorComponent $Paginator
+ * @property SessionComponent $Session
+ */
 class EventsController extends AppController {
     public $uses = array('Event','Category','Area');
     public $helpers = array('Paginator');
     public $components = array('Session','Paginator');
     //Pagenatorの設定
     public $paginate = array(
-           //モデルの指定
-           'Event' => array(
-               //ページに表示する数
-               'limit' => 3,
-               //並び順
-               'order' => array('created' => 'asc'),
-           )
+        //モデルの指定
+        'Event' => array(
+             //ページに表示する数
+             'limit' => 3,
+             //並び順
+             'order' => array('created' => 'asc'),
+        )
     );
 
 	public function index(){

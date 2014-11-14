@@ -5,26 +5,17 @@ App::uses('AppModel', 'Model');
  *
  */
 class Event extends AppModel {
-/**
- * Validation rules
- *
- * @var array
- */
-    /*public function beforeFind($queryData) {
-        $queryData = parent::beforeFind($queryData);
-        $queryData['order'][] = 'event_date';
-        return $queryData;
-    }
 
-    public function Order()
-    {
+    public function Order(){
         $posts = array();
         $order = array('Event.event_date ASC');
         $posts = $this->find('all',array('order' => $order));
         return $posts;
 
-        }*/
+    }
+
     public $name ='Event';
+
     public $belongsTo = array(
            'Area' => array(
                  'className' => 'Area',
@@ -34,33 +25,35 @@ class Event extends AppModel {
            'Category' => array(
                  'className' => 'Category',
                  'foreignKey' => 'category_id',
-                 'order' => 'Category.id ASC'
-                 
-           ));
+                 'order' => 'Category.id ASC'   
+           )
+    );
     
-     public function getEventsWithToday(){
+    public function getEventsWithToday(){
         $today = date("Y-m-d");
         
         // データの取得
-        $TODAY = $this->find('all',array('conditions' =>
-                      array('event_date LIKE?' => '%'.$today.'%')));
+        $todayEvents = $this->find('all',
+                       array('conditions' =>
+                           array('event_date LIKE?' => '%'.$today.'%')
+                       )
+        );
         //取得したデータを返却
-        return $TODAY;
-         
+        return $todayEvents;
+    }
 
-        }
-
-     public function getEventsWithTomorrow(){
+    public function getEventsWithTomorrow(){
         $tomorrow = date("Y-m-d", strtotime("+1 day"));
        
         // データの取得
-        $TOMORROW = $this->find('all',array('conditions' => array('event_date LIKE?' => '%'.$tomorrow.'%')));
+        $tomorrowEvents = $this->find('all',
+                          array('conditions' =>
+                             array('event_date LIKE?' => '%'.$tomorrow.'%')
+                          )
+        );
         //取得したデータを返却
-        return $TOMORROW;
-        }
-
-    
-
+        return $tomorrowEvents;
+    }
 
    	public $validate = array(
 		'user_id' => array(

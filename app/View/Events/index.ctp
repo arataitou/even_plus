@@ -13,9 +13,9 @@
             </td></tr>
             <tr><td><?php echo $this->Html->link('Tomorrow',
             array('controller' => 'events', 'action' =>'index', 'type' => 'tomorrow')); ?> </td></tr>
-            <tr><td><?php echo $this->Form->postlink(__('1 week'),$today[0]['Event']['event_date'],
+            <tr><td><?php echo $this->Form->postlink(__('1 week'), $today[0]['Event']['event_date'],
             array('controller' => 'events', 'action' =>'index', $today[0]['Event']['id'])); ?> </td></tr>
-            <tr><td><?php echo $this->Form->postlink(__('2 weeks'),$today[0]['Event']['event_date'],
+            <tr><td><?php echo $this->Form->postlink(__('2 weeks'), $today[0]['Event']['event_date'],
             array('controller' => 'events', 'action' =>'index', $today[0]['Event']['id'])); ?> </td></tr>
         </tbody>
 	</table>
@@ -31,7 +31,7 @@
     <tbody>
     <tr>
         <td><?php echo $this->Html->link($data['Event']['event_title'],
-         array('controller' => 'events','action' => 'view',$data['Event']['id'])); ?></td>
+         array('controller' => 'events','action' => 'view', $data['Event']['id'])); ?></td>
     </tr>
     <tr>
         <td><?php echo $data['Event']['event_img']; ?><td>

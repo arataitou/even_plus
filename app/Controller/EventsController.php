@@ -1,51 +1,45 @@
 <?php
 App::uses('AppController', 'Controller');
-/**
- * Events Controller
- *
- * @property Event $Event
- * @property PaginatorComponent $Paginator
- * @property SessionComponent $Session
- */
+
 class EventsController extends AppController {
     public $uses = array('Event','Category','Area');
     public $helpers = array('Paginator');
     public $components = array('Session','Paginator');
     //Pagenatorの設定
     public $paginate = array(
-    //モデルの指定
-    'Event' => array(
-    //ページに表示する数
-    'limit' => 3,
-    //並び順
-    'order' => array('created' => 'asc'),
-    ));
+           //モデルの指定
+           'Event' => array(
+               //ページに表示する数
+               'limit' => 3,
+               //並び順
+               'order' => array('created' => 'asc'),
+           )
+    );
 
-	public function index($id = null){
+	public function index(){
 
-        $param_id = $id;
-        $ord = array(
+        $order = array(
                   'order' => 'event_date asc',
                   'limit' => 4,
-                );
-        $eventList = $this->Event->find('all',$ord);
+        );
+        $eventList = $this->Event->find('all', $order);
 		$this->set('events', $eventList);
 
         //日付ソートのデータ
         $today_date = $this->Event->getEventsWithToday();
-        $this->set('today',$today_date);
+        $this->set('today', $today_date);
 
         $tomorrow_date = $this->Event->getEventsWithTomorrow();
-        $this->set('tomorrow',$tomorrow_date);
+        $this->set('tomorrow', $tomorrow_date);
 
         $this->Paginator->settings = $this->paginate;
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
 
         $type = $this->params['named']['type'];
-        $this->set('types',$type);
+        $this->set('types', $type);
 
-        }
+    }
 
 
 

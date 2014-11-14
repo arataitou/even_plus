@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+    public $uses = array('Event', 'User', 'Category', 'Area', 'Participants');
 
 /**
  * Components
@@ -35,13 +35,42 @@ class EventsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Event->exists($id)) {
+        if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
         }
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
         $this->set('event', $this->Event->find('first', $options));
+
+        $users = $this->User->find('all', array('fields' => array('id', 'name')));
+
+        //user_idからuser名を取れるように配列を操作してviewにぶちあげ
+        $this->set('users', $users);
+        $userId = array();
+        $userName = array();
+        foreach($users as $user){
+            array_push($userId, $user['User']['id']);
+            array_push($userName, $user['User']['name']);
+        }
+        $idName = array_combine($userId, $userName);
+        $this->set('idName', $idName);
+
+        //個別answerページのためにpaginateにぶち込んでviewにぶちあげ
+        $this->paginate = array(
+            'limit' => '10',
+            'conditions' => array('event_id' => $id)
+            );
+        $this->set('participantsEach', $this->Paginator->paginate('Participants'));
+        
+        //三名の三回答をランダムに表示するために配列を三件ランダムに取得してviewにぶちあげ
+        $participants = $this->Participants->find('all', array(
+            'order' => 'rand()',
+            'limit' => 3,
+            'conditions' => array('event_id' => $id)
+            ));
+        $this->set('participantsRandom', $participants);
+
         /*
-        //login済みのユーザーで合った場合「参加ボタン」を表示するため、viewにuser_idをset
+        //login済みのユーザーだった場合「参加ボタン」を表示するため、viewにuser_idをset
         if ($userId = $this->Auth->user('id')){
             $this->set('userId', $userId);
             if ($userId == '1' || $this->Event->data["user_id"]){

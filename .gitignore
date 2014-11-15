@@ -9,6 +9,8 @@
 /dist
 /tags
 *.mo
+*.swo
+*.swp
 
 # IDE and editor specific files #
 #################################

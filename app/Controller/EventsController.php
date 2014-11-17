@@ -41,9 +41,8 @@ class EventsController extends AppController {
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
         $this->set('event', $this->Event->find('first', $options));
 
-        $users = $this->User->find('all', array('fields' => array('id', 'name')));
-
         //user_idからuser名を取れるように配列を操作してviewにぶちあげ
+        $users = $this->User->find('all', array('fields' => array('id', 'name')));
         $this->set('users', $users);
         $userId = array();
         $userName = array();
@@ -51,8 +50,8 @@ class EventsController extends AppController {
             array_push($userId, $user['User']['id']);
             array_push($userName, $user['User']['name']);
         }
-        $idName = array_combine($userId, $userName);
-        $this->set('idName', $idName);
+        $userIdAndName = array_combine($userId, $userName);
+        $this->set('userIdAndName', $userIdAndName);
 
         //個別answerページのためにpaginateにぶち込んでviewにぶちあげ
         $this->paginate = array(

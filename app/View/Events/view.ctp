@@ -4,7 +4,7 @@
     <h3><?php echo __('Event Plan'); ?></h3>
 	<dl>
 		<dt><?php echo __('Date'); ?></dt>
-		<dd>
+        <dd>
 			<?php echo h($event['Event']['event_date']); ?>
 			&nbsp;
         </dd>
@@ -49,7 +49,7 @@
                 case '1':
                     echo '<h3>'.__('Q1 ').$event['Event']['question_1'].'</h3>';
                     foreach($participantsEach as $each){
-                        echo '<p>'.$each['Participants']['answer_1'].'...'.$this->Html->link($idName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
+                        echo '<p>'.$each['Participants']['answer_1'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
                     echo $this->Paginator->numbers(array('separator' => ''));
@@ -58,7 +58,7 @@
                 case '2' :
                     echo '<h3>'.__('Q2 ').$event['Event']['question_2'].'</h3>';
                     foreach($participantsEach as $each){
-                        echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($idName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
+                        echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
                     echo $this->Paginator->numbers(array('separator' => ''));
@@ -67,7 +67,7 @@
                 case '3' :
                     echo '<h3>'.__('Q3 ').$event['Event']['question_3'].'</h3>';
                     foreach($participantsEach as $each){
-                        echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($idName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
+                        echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
                     echo $this->Paginator->numbers(array('separator' => ''));
@@ -81,21 +81,21 @@
     <h3><?php echo __('Q1 ').$event['Event']['question_1']; ?></h3>
             <?php
                 foreach($participantsRandom as $random){
-                     echo '<p>'.$random['Participants']['answer_1'].'...'.$this->Html->link($idName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
+                     echo '<p>'.$random['Participants']['answer_1'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
             }
             ?>
     <p><?php echo $this->Html->link('Check more answers', '/events/view/'.$event['Event']['id'].'?moreanswers=1'); ?></p>
     <h3><?php echo __('Q2 ').$event['Event']['question_2']; ?></h3>
             <?php
                 foreach($participantsRandom as $random){
-                    echo '<p>'.$random['Participants']['answer_2'].'...'.$this->Html->link($idName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
+                    echo '<p>'.$random['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
                 }
             ?>
     <p><?php echo $this->Html->link('Check more answers', '/events/view/'.$event['Event']['id'].'?moreanswers=2'); ?></p>
     <h3><?php echo __('Q3 ').$event['Event']['question_3']; ?></h3>
             <?php
                 foreach($participantsRandom as $random){
-                    echo '<p>'.$random['Participants']['answer_3'].'...'.$this->Html->link($idName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
+                    echo '<p>'.$random['Participants']['answer_3'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
                 }
             ?>
     <p><?php echo $this->Html->link('Check more answers', '/events/view/'.$event['Event']['id'].'?moreanswers=3'); ?></p>
@@ -104,7 +104,7 @@
     <ul>
     <?php
         foreach($participantsEach as $participant){
-            echo '<li>'.$this->Html->link($idName[$participant['Participants']['user_id']], '/users/view/'.$participant['Participants']['user_id']).'</li>';
+            echo '<li>'.$this->Html->link($userIdAndName[$participant['Participants']['user_id']], '/users/view/'.$participant['Participants']['user_id']).'</li>';
         }
     ?>
     </ul>

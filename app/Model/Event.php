@@ -8,17 +8,17 @@ class Event extends AppModel {
    public $belongsTo = array(
         'Area' => array(
             'classname' => 'Area',
-            'foeignKey' => 'area_name',
+            'foreignKey' => 'area_id',
             'type' => 'left'
         ),
         'Category' => array(
             'classname' => 'Category',
-            'foeignKey' => 'category_aid',
+            'foreignKey' => 'category_id',
             'type' => 'left'
         ),
         'User' => array(
             'classname' => 'User',
-            'foeignKey' => 'user_id',
+            'foreignKey' => 'user_id',
             'type' => 'left'
         ),
     ); 

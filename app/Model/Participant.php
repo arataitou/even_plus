@@ -11,6 +11,22 @@ class Participant extends AppModel {
  *
  * @var array
  */
+
+
+    //Eventの結合 
+    public $name = 'Participant';
+    public $belongsTo = array(
+        'Event' => array(
+            'className'     => 'Event',
+            'foreignKey'    => 'event_id',
+            'order' => 'event_date asc',
+            'dependent'     => true
+        )
+    );
+
+
+
+
 	public $validate = array(
 		'event_id' => array(
 			'numeric' => array(

@@ -15,14 +15,40 @@ class EventsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session');
+    public $components = array('Paginator', 'Session');
+
+
+
+    //ユーザ制限
+    public function isAuthorized($user){
+        //登録済みユーザは投稿できる。
+        if($this->action ==='add'){
+            return true;
+        }
+
+        //投稿のオーナーは編集や削除ができる。
+        if(in_array($this->action,array('edit','delete'))){
+            $eventId = (int)$this->request->params['pass'][0];
+            if($this->Event->isOwnedBy($eventId,$user['id'])){
+                return true;
+            }
+        }
+        return parent::isAuthorized($user);
+    }
+
+
 
 /**
  * index method
  *
  * @return void
  */
-	public function index() {
+    public function index() {
+
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
+
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
 	}
@@ -48,7 +74,12 @@ class EventsController extends AppController {
  * @return void
  */
     public function add() {
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
         if ($this->request->is('post')) {
+            $this->request->data['Event']['user_id'] = $this->Auth->user('id');
+
             $eventMonth = $this->request->data["Event"]["month"];
             $eventDay = $this->request->data["Event"]["day"];
             $eventYear = $this->request->data["Event"]["year"];

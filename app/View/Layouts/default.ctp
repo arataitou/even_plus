@@ -28,7 +28,7 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-	?>
+    ?>
 
 
 	<?php 
@@ -36,21 +36,36 @@
 		//Topのロゴ (/even_plus/top/index) へLink
 		echo '<a href='.'/even_plus/top/index'.'><h1>'."Even+".'</h1></a>';
 
-		//Button表示各ページへのLink
-		echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
-		echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
-		echo $this->Html->link('Login', '/users/login', array('class'=>'button'));
-		echo $this->Html->link('Signup', '/users/Signup', array('class'=>'button'));
-		echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
-		echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
+
+         if(isset($status['id']) && ($status['group_id']=1)){
+
+		    //Bottum表示各ページへのLink
+		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
+		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
+            echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
+            echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
+
+         }
+        if(isset($status['id']) && ($status['group_id']=0)){
+
+		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
+		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
+            echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
+		    echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
+
+        }
+        if(!isset($status['id'])){
+
+            echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
+            echo $this->Html->link('Login','/users/login',array('class'=>'button'));
+            echo $this->Html->link('Signup','/users/signup',array('class'=>'button'));
+        }
 
 	?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-
-
 		</div>
 		<div id="content">
 
@@ -62,7 +77,6 @@
 
 
 			<?php 
-
 				echo $this->Html->link('Home', '/tops/index', array('class'=>'button'));
 			?>
 

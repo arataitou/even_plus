@@ -32,8 +32,45 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 
+
 	//Html,From,Session機能を使う為、登録する。
     public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('DebugKit.Toolbar');
+
+    // Login,Logoutの認証
+    // LoginとLogoutのactionが実行された後に読み込まれるURLを設定
+    public $components = array(
+        'Session',
+        'Auth' => array(
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array('username' => 'name', 'password' => 'password')
+                )
+            ),
+
+
+            'loginRedirect' => array('controller' => 'tops', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+            //ユーザ認証部
+            'authorize'=> array('Controller')
+        )
+    );
+
+
+    //ユーザ制限
+    public function isAuthorized($user) {
+        //group_id=1はadmin
+        if(isset($user['group_id']) && $user['group_id'] ==='1'){
+          return true;
+       }
+       //デフォルトは拒否
+       return false;
+   }
+
+
+    //AuthComponentに全てのコントローラの viewとsignup アクションでログインを必要としないように設定。
+    public function beforeFilter() {
+        $this->Auth->allow('view','signup');
+    }
+
 
 }

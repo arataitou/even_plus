@@ -59,13 +59,7 @@
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
             echo $this->Html->link('Login','/users/login',array('class'=>'button'));
             echo $this->Html->link('Signup','/users/signup',array('class'=>'button'));
-
         }
-
-
-debug($status);
-
-            
 
 	?>
 </head>

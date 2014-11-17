@@ -16,8 +16,6 @@ class User extends AppModel {
  *
  * @var string
  */
-    
-	//public $displayField = 'name';
 
     //ユーザーが保存されるときは毎回 SimplePasswordHasher 
     //クラスを用いてパスワードがハッシュ化されます。
@@ -45,7 +43,10 @@ class User extends AppModel {
             )
         )
     );
-    
+   
+    public function isOwnedBy($user, $user) {
+    return $this->field('id', array('id' => $user, 'id' => $user)) !== false;
+}
 
 
 

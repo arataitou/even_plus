@@ -126,6 +126,6 @@ class Event extends AppModel {
 			'boolean' => array(
 				'rule' => array('boolean'),
 			),
-		),
+        ),
 	);
 }

@@ -35,8 +35,6 @@ class AppController extends Controller {
 
 	//Html,From,Session機能を使う為、登録する。
     public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('DebugKit.Toolbar');
-
 
     // Login,Logoutの認証
     // LoginとLogoutのactionが実行された後に読み込まれるURLを設定

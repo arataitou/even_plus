@@ -15,7 +15,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator', 'Session','Paginator');
+	public $components = array('Paginator', 'Session');
     public $helpers = array('Paginator');
 	
 	public function beforeFilter() {
@@ -122,7 +122,7 @@ class UsersController extends AppController {
 
                 //Participant tableを次の条件でfind('all')  ① loginUserId ② 参加フラグ ③ today以前の日付
                 $entryEventPast = $this->Participant->find('all',array(
-                'conditions'=> array('Participant.user_id'=>$status['id'],'Paticipant.status'=>0,'Event.event_date <'=> $todayDate)));
+                'conditions'=> array('Participant.user_id'=>$status['id'],'Participant.status'=>0,'Event.event_date <'=> $todayDate)));
                 $this->set('entryEventPast',$entryEventPast);
 	}
 }
@@ -233,7 +233,8 @@ class UsersController extends AppController {
 		} else {
 			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
 		}
-		return $this->redirect(array('action' => 'logout'));
+        return $this->redirect(array('action' => 'logout'));
+        }
 	}
 
 /**

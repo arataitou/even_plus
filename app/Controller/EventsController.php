@@ -74,8 +74,12 @@ class EventsController extends AppController {
  * @return void
  */
     public function add() {
+        $status=$this->Auth->user();
+        $this->set('status',$status);
 
         if ($this->request->is('post')) {
+            $this->request->data['Event']['user_id'] = $this->Auth->user('id');
+
             $eventMonth = $this->request->data["Event"]["month"];
             $eventDay = $this->request->data["Event"]["day"];
             $eventYear = $this->request->data["Event"]["year"];

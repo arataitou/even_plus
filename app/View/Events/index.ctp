@@ -27,7 +27,7 @@
 	<?php foreach ($events as $event): ?>
 	<tr>
 		<td><?php echo h($event['Event']['id']); ?>&nbsp;</td>
-		<td><?php echo h($event['Event']['user_id']); ?>&nbsp;</td>
+        <td><?php echo h($event['Event']['user_id']); ?>&nbsp;</td>
 		<td><?php echo h($event['Event']['category_id']); ?>&nbsp;</td>
 		<td><?php echo h($event['Event']['area_id']); ?>&nbsp;</td>
 		<td><?php echo h($event['Event']['event_title']); ?>&nbsp;</td>

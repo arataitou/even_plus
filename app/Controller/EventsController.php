@@ -215,4 +215,18 @@ class EventsController extends AppController {
 
     public function join($id = null){
     }
+
+    public function cancel($id = null){
+        if ($this->Event->exists($id)) {
+            throw new NotFoundException(__('Invlid event'));
+        }
+        if ($this->request->is(array('post', 'put'))) {
+            if ($this->Event->save($this->request->data)) {
+                $this->Session->setFlash(__('You canceled to participate this event.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('You could not cancel to participate this event.'));
+            }
+        }
+    }
 }

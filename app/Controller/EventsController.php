@@ -139,22 +139,17 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
+
+
 	public function edit($id = null) {
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
 		}
 
-            $eventEdit = $this->Event->find('all',array('conditions'=> array('Event.user_id'=>33)));
-            $this->set('eventEdit',$eventEdit);
-debug($eventEdit);
 		if ($this->request->is(array('post', 'put'))) {
 
-         //   $status=$this->Auth->user();
-         //   $this->set('status',$status);
-
-            $eventEdit = $this->Event->find('all',array('conditions'=> array('Event.user_id'=>33)));
-            $this->set('eventEdit',$eventEdit);
-debug($eventEdit);
+            $data = array('id' => $id);
+            $this->Event->save($data); 
 
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
@@ -166,6 +161,11 @@ debug($eventEdit);
 			$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
 			$this->request->data = $this->Event->find('first', $options);
 		}
+
+        $this->set('categories', $this->Category->find('list',
+            array('fields' => array('Category.id', 'Category.category_title'))));
+        $this->set('areas',$this->Area->find('list',
+            array('fields' => array('Area.id', 'Area.area_name'))));
 	}
 
 /**

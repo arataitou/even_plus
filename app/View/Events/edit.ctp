@@ -2,16 +2,11 @@
 <?php echo $this->Form->create('Event'); ?>
 	<fieldset>
 
-<?php debug($eventEdit);?>
-<?php debug($eventEdit['0']['Event']['id']);?>
 		<legend><?php echo __('Edit Event'); ?></legend>
 	<?php
-		echo $this->Form->input('user_id',array('default' => $eventEdit['0']['Event']['id']));
-		echo $this->Form->input('user_id');
 		echo $this->Form->input('category_id');
 		echo $this->Form->input('area_id');
 		echo $this->Form->input('event_title');
-		echo $this->Form->input('event_img');
 		echo $this->Form->input('event_date');
 		echo $this->Form->input('event_place');
 		echo $this->Form->input('event_address');
@@ -20,7 +15,6 @@
 		echo $this->Form->input('question_1');
 		echo $this->Form->input('question_2');
 		echo $this->Form->input('question_3');
-		echo $this->Form->input('status');
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

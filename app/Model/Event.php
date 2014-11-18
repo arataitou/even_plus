@@ -10,6 +10,24 @@ class Event extends AppModel {
  *
  * @var array
  */
+
+    public $name = 'Event';
+    public $belongsTo = array(
+        'Area' => array(
+            'className'     => 'Area',
+            'foreignKey'    => 'area_id',
+            'dependent'     => true
+        ),
+        'Category' => array(
+            'className'     => 'Category',
+            'foreignKey'    => 'category_id',
+            'dependent'     => true
+        ),
+ );
+
+
+
+
 	public $validate = array(
 		'user_id' => array(
 			'numeric' => array(

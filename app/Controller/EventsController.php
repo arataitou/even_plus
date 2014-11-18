@@ -143,7 +143,19 @@ class EventsController extends AppController {
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
 		}
+
+            $eventEdit = $this->Event->find('all',array('conditions'=> array('Event.user_id'=>33)));
+            $this->set('eventEdit',$eventEdit);
+debug($eventEdit);
 		if ($this->request->is(array('post', 'put'))) {
+
+         //   $status=$this->Auth->user();
+         //   $this->set('status',$status);
+
+            $eventEdit = $this->Event->find('all',array('conditions'=> array('Event.user_id'=>33)));
+            $this->set('eventEdit',$eventEdit);
+debug($eventEdit);
+
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
 				return $this->redirect(array('action' => 'index'));

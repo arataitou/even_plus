@@ -1,9 +1,12 @@
 <div class="events form">
 <?php echo $this->Form->create('Event'); ?>
 	<fieldset>
+
+<?php debug($eventEdit);?>
+<?php debug($eventEdit['0']['Event']['id']);?>
 		<legend><?php echo __('Edit Event'); ?></legend>
 	<?php
-		echo $this->Form->input('id');
+		echo $this->Form->input('user_id',array('default' => $eventEdit['0']['Event']['id']));
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('category_id');
 		echo $this->Form->input('area_id');

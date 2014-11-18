@@ -13,44 +13,104 @@ class EventsController extends AppController {
      public $components = array('Session','Paginator');
      //Pagenatorの設定
      public $paginate = array(
-     //モデルの指定
-     'Event' => array(
-     //ページに表示する数
-     'limit' => 3,
-     //並び順
-     'order' => array('created' => 'asc'),
-     ));
+                   //モデルの指定
+                   'Event' => array(
+                       //ページに表示する数
+                       'limit' => 3,
+                       //並び順
+                       'order' => array('created' => 'asc'),
+                   )
+        );
 
 	public function index(){
 
         //日付ソートのデータ
-        $today_date = $this->Event->getEventsWithToday();
-        $this->set('today',$today_date);
+        $today_data = $this->Event->getEventsWithToday();
+        $this->set('today', $today_data);
         
-        $tomorrow_date = $this->Event->getEventsWithTomorrow();
-        $this->set('tomorrow',$tomorrow_date);
+        $tomorrow_data = $this->Event->getEventsWithTomorrow();
+        $this->set('tomorrow', $tomorrow_data);
         
-        $oneWeek_date = $this->Event->getEventsWithOneWeek();
-        $this->set('oneweek',$oneWeek_date);
+        $oneWeek_data = $this->Event->getEventsWithOneWeek();
+        $this->set('oneweek', $oneWeek_data);
 
-        $twoWeeks_date = $this->Event->getEventsWithTwoWeeks();
-        $this->set('twoweeks',$twoWeeks_date);
+        $twoWeeks_data = $this->Event->getEventsWithTwoWeeks();
+        $this->set('twoweeks', $twoWeeks_data);
 
-        //$this->Paginator->settings = $this->paginate;
+        //エリアソートのデータ
+        $downtown_data = $this->Event->getEventsWithDowntown();
+        $this->set('downtown', $downtown_data);
+        
+        $midtown_data = $this->Event->getEventsWithMidtown();
+        $this->set('midtown', $midtown_data);
+
+        $uptown_data = $this->Event->getEventsWithUptown();
+        $this->set('uptown', $uptown_data);
+
+        $provinces_data = $this->Event->getEventsWithProvinces();
+        $this->set('provinces', $provinces_data);
+
+        $others_data = $this->Event->getEventsWithOthers();
+        $this->set('others', $others_data);
+        
+        //予算ソートのデータ
+        $free_data = $this->Event->getEventsWithFree();
+        $this->set('free', $free_data);
+
+        $priceOne_data = $this->Event->getEventsWithPriceOne();
+        $this->set('priceone', $priceOne_data);
+        
+        $priceTwo_data = $this->Event->getEventsWithPriceTwo();
+        $this->set('pricetwo', $priceTwo_data);
+
+        $priceThree_data = $this->Event->getEventsWithPriceThree();
+        $this->set('pricethree', $priceThree_data);
+
+        $priceFour_data = $this->Event->getEventsWithPriceFour();
+        $this->set('pricefour', $priceFour_data);
+
+        $priceFive_data = $this->Event->getEventsWithPriceFive();
+        $this->set('pricefive', $priceFive_data);
+        
+        //カテゴリソートのデータ
+        $party_data = $this->Event->getEventsWithParty();
+        $this->set('party', $party_data);
+
+        $study_data = $this->Event->getEventsWithStudy();
+        $this->set('study', $study_data);
+        
+        $festival_data = $this->Event->getEventsWithFestival();
+        $this->set('festival', $festival_data);
+
+        $sports_data = $this->Event->getEventsWithSports();
+        $this->set('sports', $sports_data);
+
+        $culture_data = $this->Event->getEventsWithCulture();
+        $this->set('culture', $culture_data);
+
+        $trip_data = $this->Event->getEventsWithTrip();
+        $this->set('trip', $trip_data);
+
+        $others_date = $this->Event->getEventsWithOthers();
         $start = date('Y-m-d');
         $this->Paginator->settings = array(
               'Event' => array(
                      'order' => 'Event.event_date asc',
-                     'limit' => 3,
+                     'limit' => 8,
                      'conditions' => array(
-                      'Event.event_date >=' => $start)));
+                         'Event.event_date >=' => $start)
+              )
+        );
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
         
-        $type = $this->params['named']['type'];
-        $this->set('types',$type);
-
+        if (isset($this->params['named']['type'])){
+            $type = $this->params['named']['type'];
+            $this->set('types',$type);
         }
+
+              
+    }
     
     
 

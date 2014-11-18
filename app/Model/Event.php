@@ -4,59 +4,25 @@ App::uses('AppModel', 'Model');
  * Event Model
  *
  */
+
 class Event extends AppModel {
 
-    public function Order(){
-        $posts = array();
-        $order = array('Event.event_date ASC');
-        $posts = $this->find('all',array('order' => $order));
-        return $posts;
-
-    }
-
     public $name ='Event';
-
     public $belongsTo = array(
-           'Area' => array(
-                 'className' => 'Area',
-                 'foreignKey' => 'area_id',
-                 'order' => 'Area.id ASC'
-                 ),
-           'Category' => array(
-                 'className' => 'Category',
-                 'foreignKey' => 'category_id',
-                 'order' => 'Category.id ASC'   
-           )
+                            'Area' => array(
+                                'className' => 'Area',
+                                'foreignKey' => 'area_id',
+                                'order' => 'Area.id ASC'
+                            ),
+                            'Category' => array(
+                                'className' => 'Category',
+                                'foreignKey' => 'category_id',
+                                'order' => 'Category.id ASC'   
+                            ) 
     );
-    
-    public function getEventsWithToday(){
-        $today = date("Y-m-d");
-        
-        // データの取得
-        $todayEvents = $this->find('all',
-                       array('conditions' =>
-                           array('event_date LIKE?' => '%'.$today.'%')
-                       )
-        );
-        //取得したデータを返却
-        return $todayEvents;
-    }
-
-    public function getEventsWithTomorrow(){
-        $tomorrow = date("Y-m-d", strtotime("+1 day"));
-       
-        // データの取得
-        $tomorrowEvents = $this->find('all',
-                          array('conditions' =>
-                             array('event_date LIKE?' => '%'.$tomorrow.'%')
-                          )
-        );
-        //取得したデータを返却
-        return $tomorrowEvents;
-    }
 
    	public $validate = array(
-		'user_id' => array(
+        'user_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 			),
@@ -155,4 +121,35 @@ class Event extends AppModel {
 			),
 		),
 	);
+    
+    public function order(){
+        $posts = array();
+        $order = array('Event.event_date ASC');
+        $posts = $this->find('all',array('order' => $order));
+        return $posts;
+
+    }
+    public function getEventsWithToday(){
+        $today = date("Y-m-d");
+        
+        // データの取得
+        $todayEvents = $this->find(
+                              'all',
+                              array('conditions' =>
+                              array('event_date LIKE?' => '%'.$today.'%')
+                              )
+                              );
+        //取得したデータを返却
+        return $todayEvents;
+    }
+
+    public function getEventsWithTomorrow(){
+        $tomorrow = date("Y-m-d", strtotime("+1 day"));
+       
+        // データの取得
+        $tomorrowEvents = $this->find(
+                                 'all',
+                                 array('conditions' =>
+                                 array('event_date LIKE?' => '%'.$tomorrow.'%')
+                                 )
 }

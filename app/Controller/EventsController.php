@@ -11,7 +11,7 @@ class EventsController extends AppController {
     public $uses = array('Event','Category','Area');
     public $helpers = array('Paginator');
     public $components = array('Session','Paginator');
-    //Pagenatorの設定
+    //Paginatorの設定
     public $paginate = array(
         //モデルの指定
         'Event' => array(
@@ -25,8 +25,8 @@ class EventsController extends AppController {
 	public function index(){
 
         $order = array(
-                  'order' => 'event_date asc',
-                  'limit' => 4,
+                     'order' => 'event_date asc',
+                     'limit' => 4,
         );
         $eventList = $this->Event->find('all', $order);
 		$this->set('events', $eventList);

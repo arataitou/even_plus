@@ -1,7 +1,18 @@
 <?php
 App::uses('AppModel', 'Model');
+/**
+ * Area Model
+ *
+ * @property Event $Event
+ */
 
 class Area extends AppModel {
+
+/**
+ * Validation rules
+ *
+ * @var array
+ */
 
 	public $validate = array(
 		'area_name' => array(

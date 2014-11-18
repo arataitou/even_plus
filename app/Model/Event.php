@@ -4,7 +4,26 @@ App::uses('AppModel', 'Model');
  * Event Model
  *
  */
+
 class Event extends AppModel {
+    public $name ='Event';
+   public $belongsTo = array(
+        'Area' => array(
+            'classname' => 'Area',
+            'foreignKey' => 'area_id',
+            'type' => 'left'
+        ),
+        'Category' => array(
+            'classname' => 'Category',
+            'foreignKey' => 'category_id',
+            'type' => 'left'
+        ),
+        'User' => array(
+            'classname' => 'User',
+            'foreignKey' => 'user_id',
+            'type' => 'left'
+        ),
+    );
 
 
 public function isOwnedBy($event, $user) {
@@ -18,139 +37,144 @@ public function isOwnedBy($event, $user) {
  *
  * @var array
  */
+<<<<<<< HEAD
 
 
 	public $validate = array(
 		'user_id' => array(
+=======
+   	public $validate = array(
+        'user_id' => array(
+>>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 		'category_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'allowEmpty' => false,
 			),
 		),
 		'area_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'allowEmpty' => false,
 			),
 		),
 		'event_title' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('notEmpty')
 			),
-		),
+			'between' => array(
+				'rule' => array('between', 5, 50),
+				'message' => 'Between 5 to 50 characters'),
+        ),
+		//EventControllerでValidation
 		'event_date' => array(
 			'datetime' => array(
-				'rule' => array('datetime'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('notEmpty'),
+				'message' => 'Please input the Datetime.',
+				'allowEmpty' => false,
 			),
 		),
 		'event_place' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			'between' => array(
+				'rule' => array('between', 0, 20),
+                'message' => 'Between 0 to 20 characters'
+            ),
 		),
 		'event_address' => array(
 			'notEmpty' => array(
 				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+			'between' => array(
+				'rule' => array('between', 0, 100),
+				'message' => 'Between 0 to 100 characters'
 			),
 		),
 		'event_price' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
+			'naturalNumber' => array(
+              	'rule'    => array('range', -1, 801),
+            	'message' => 'Please enter a number between 0 and 800'
+            ),
+        ),
 		'event_detail' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('notEmpty')
 			),
-		),
+		    'bio' => array(
+                'rule' => array('between', 50, 300),
+                'message' => '50文字以上、300文字以下で入力して下さい。'
+                )
+		    ),
 		'question_1' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+                'rule' => array('notEmpty')
 			),
+			'bio' => array(
+                'rule' => array('between', 5, 200),
+                'message' => '5文字以上、200文字以下で入力して下さい。'
+            )
 		),
 		'question_2' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('notEmpty')
 			),
+			'bio' => array(
+                'rule' => array( 'between', 5, 200),
+                'message' => '5文字以上、200文字以下で入力して下さい。'
+            )
 		),
 		'question_3' => array(
 			'notEmpty' => array(
-				'rule' => array('notEmpty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				'rule' => array('notEmpty')
 			),
+			'bio' => array(
+                'rule' => array('between', 5, 200),
+                'message' => '5文字以上、200文字以下で入力して下さい。'
+            )
 		),
 		'status' => array(
 			'boolean' => array(
 				'rule' => array('boolean'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
 	);
+
+    public function order(){
+        $posts = array();
+        $order = array('Event.event_date ASC');
+        $posts = $this->find('all',array('order' => $order));
+        return $posts;
+
+    }
+    public function getEventsWithToday(){
+        $today = date("Y-m-d");
+
+        // データの取得
+        $todayEvents = $this->find(
+                              'all',
+                              array('conditions' =>
+                              array('event_date LIKE?' => '%'.$today.'%')
+                              )
+                              );
+        //取得したデータを返却
+        return $todayEvents;
+    }
+
+    public function getEventsWithTomorrow(){
+        $tomorrow = date("Y-m-d", strtotime("+1 day"));
+
+        // データの取得
+        $tomorrowEvents = $this->find(
+                                 'all',
+                                 array('conditions' =>
+                                    array('event_date LIKE?' => '%'.$tomorrow.'%')
+                                 ));
+    }
 }
 

@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+    public $uses = array('Event', 'User', 'Category', 'Area', 'Participants');
 
 /**
  * Components
@@ -25,7 +25,7 @@ class EventsController extends AppController {
 	public function index() {
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
-	}
+    }
 
 /**
  * view method
@@ -35,13 +35,49 @@ class EventsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		if (!$this->Event->exists($id)) {
+        if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
-		}
+        }
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
-		$this->set('event', $this->Event->find('first', $options));
-	}
+        $this->set('event', $this->Event->find('first', $options));
 
+        //user_idからuser名を取れるように配列を操作してviewにぶちあげ
+        $users = $this->User->find('all', array('fields' => array('id', 'name')));
+        $this->set('users', $users);
+        $userId = array();
+        $userName = array();
+        foreach($users as $user){
+            array_push($userId, $user['User']['id']);
+            array_push($userName, $user['User']['name']);
+        }
+        $userIdAndName = array_combine($userId, $userName);
+        $this->set('userIdAndName', $userIdAndName);
+
+        //個別answerページのためにpaginateにぶち込んでviewにぶちあげ
+        $this->paginate = array(
+            'limit' => '10',
+            'conditions' => array('event_id' => $id)
+            );
+        $this->set('participantsEach', $this->Paginator->paginate('Participants'));
+
+        //三名の三回答をランダムに表示するために配列を三件ランダムに取得してviewにぶちあげ
+        $participants = $this->Participants->find('all', array(
+            'order' => 'rand()',
+            'limit' => 3,
+            'conditions' => array('event_id' => $id)
+            ));
+        $this->set('participantsRandom', $participants);
+
+        /*
+        //login済みのユーザーだった場合「参加ボタン」を表示するため、viewにuser_idをset
+        if ($userId = $this->Auth->user('id')){
+            $this->set('userId', $userId);
+            if ($userId == '1' || $this->Event->data["user_id"]){
+                $this->set('flagUd', "haveAuthority");
+            }
+        }
+         */
+    }
 /**
  * add method
  *
@@ -175,5 +211,8 @@ class EventsController extends AppController {
 			$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-        }
     }
+
+    public function join($id = null){
+    }
+}

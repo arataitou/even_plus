@@ -1,5 +1,5 @@
 <div class="join form">
-<?php echo $this->Form->create('join'); ?>
+<?php echo $this->Form->create('Participant'); ?>
     <fieldset>
         <legend><?php echo __('Join the Event'); ?></legend>
         <h2><?php echo $eventInfo['Event']['event_title']?></h2>

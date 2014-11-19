@@ -18,6 +18,9 @@
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete'), array(), __('Are you sure you want to delete ?')); ?>
+
+
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

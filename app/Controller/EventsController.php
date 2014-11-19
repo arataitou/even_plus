@@ -179,13 +179,19 @@ class EventsController extends AppController {
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Event->delete()) {
-			$this->Session->setFlash(__('The event has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
         }
+
+		if ($this->request->is(array('post', 'put'))) {
+
+            $data = array('id' => $id,'status' => '1');
+            $this->Event->save($data); 
+
+			if ($this->Event->save($this->request->data)) {
+				$this->Session->setFlash(__('The event has been deleted.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
+			}
+		} 
     }
+}

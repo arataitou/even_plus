@@ -217,16 +217,29 @@ class EventsController extends AppController {
     }
 
     public function cancel($id = null){
-        if ($this->Event->exists($id)) {
+        $this->Event->id = $id;
+        if (!$this->Event->exists($id)) {
             throw new NotFoundException(__('Invlid event'));
         }
-        if ($this->request->is(array('post', 'put'))) {
-            if ($this->Event->save($this->request->data)) {
-                $this->Session->setFlash(__('You canceled to participate this event.'));
-                return $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('You could not cancel to participate this event.'));
-            }
+
+        $userJoinEvent = $this->Participants->find('first', array(
+            'conditions' => array('event_id' => $id,
+            //'user_id' => $this->Auth->user('id'),
+            //'status' => 'true'
+        ),//user_id、statusの検索条件追加
+            )
+        );
+
+        $cancelInfo = array(
+            "id" => $userJoinEvent['Particpant']['id'], 
+            "status" => 'false'
+        );
+
+        if ($this->Participants->save($cancelInfo)) {
+            $this->Session->setFlash(__('You canceled to participate this event.'));
+            return $this->redirect(array('action' => 'index'));
+        } else {
+            $this->Session->setFlash(__('You could not cancel to participate this event.'));
         }
     }
 }

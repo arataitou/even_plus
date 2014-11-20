@@ -26,21 +26,20 @@ class Event extends AppModel {
         }*/
     public $name ='Event';
     public $belongsTo = array(
-           'Area' => array(
-                 'className' => 'Area',
-                 'foreignKey' => 'area_id',
-                 'order' => 'Area.id ASC'
-                 ),
-           'Category' => array(
-                 'className' => 'Category',
-                 'foreignKey' => 'category_id',
-                 'order' => 'Category.id ASC'
-                 
-           )
-           );
+        'Area' => array(
+            'className'  => 'Area',
+            'foreignKey' => 'area_id',
+            'order'      => 'Area.id ASC'
+        ),
+        'Category' => array(
+            'className'  => 'Category',
+            'foreignKey' => 'category_id',
+            'order'      => 'Category.id ASC'
+        )
+    );
 
     //日付データ取得
-     public function getEventsWithToday(){
+    public function getEventsWithToday(){
         $today = date("Y-m-d");
         
         // データの取得
@@ -50,9 +49,9 @@ class Event extends AppModel {
                        );
         //取得したデータを返却
         return $todayEvents;
-        }
+    }
 
-     public function getEventsWithTomorrow(){
+    public function getEventsWithTomorrow(){
         $tomorrow = date("Y-m-d", strtotime("+1 day"));
        
         // データの取得
@@ -62,7 +61,7 @@ class Event extends AppModel {
                           );
         //取得したデータを返却
         return $tomorrowEvents;
-        }
+    }
 
     public function getEventsWithOneWeek(){
           $start = date('Y-m-d');
@@ -75,7 +74,8 @@ class Event extends AppModel {
           $oneweekEvents = $this->find('all', compact('conditions','order'));
           
           return $oneweekEvents;
-          }
+    }
+
     public function getEventsWithTwoWeeks(){
           $start = date('Y-m-d');
           $end =  date('Y-m-d',strtotime("+14 day"));    
@@ -87,9 +87,10 @@ class Event extends AppModel {
           $twoweeksEvents = $this->find('all', compact('conditions','order'));
           
           return $twoweeksEvents;
-          }
+    }
+
     //エリアデータ取得
-     public function getEventsWithDowntown(){
+    public function getEventsWithDowntown(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -104,9 +105,9 @@ class Event extends AppModel {
 
             //取得したデータを返却
             return $downtownEvents;
-            }
+    }
 
-     public function getEventsWithMidtown(){
+    public function getEventsWithMidtown(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -121,7 +122,7 @@ class Event extends AppModel {
 
             //取得したデータを返却
             return $midtownEvents;
-      }
+     }
 
      public function getEventsWithUptown(){
 
@@ -138,9 +139,9 @@ class Event extends AppModel {
 
             //取得したデータを返却
             return $uptownEvents;
-      }
+    }
 
-     public function getEventsWithProvinces(){
+    public function getEventsWithProvinces(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -155,9 +156,9 @@ class Event extends AppModel {
 
             //取得したデータを返却
             return $provincesEvents;
-      }
+    }
     
-     public function getEventsWithOthers(){
+    public function getEventsWithOthers(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -171,9 +172,10 @@ class Event extends AppModel {
 
             //取得したデータを返却
             return $otherEvents;
-      }
-   //予算データ取得
-     public function getEventsWithFree(){
+    }
+
+    //予算データ取得
+    public function getEventsWithFree(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -189,7 +191,7 @@ class Event extends AppModel {
             return $freeEvents;
     }
 
-     public function getEventsWithPriceOne(){
+    public function getEventsWithPriceOne(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -206,7 +208,7 @@ class Event extends AppModel {
             return $priceoneEvents;
     }
 
-     public function getEventsWithPriceTwo(){
+    public function getEventsWithPriceTwo(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -223,7 +225,7 @@ class Event extends AppModel {
             return $pricetwoEvents;
     }
 
-     public function getEventsWithPriceThree(){
+    public function getEventsWithPriceThree(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -240,7 +242,7 @@ class Event extends AppModel {
             return $pricethreeEvents;
     }
 
-     public function getEventsWithPriceFour(){
+    public function getEventsWithPriceFour(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -257,7 +259,7 @@ class Event extends AppModel {
             return $pricefourEvents;
     }
 
-     public function getEventsWithPriceFive(){
+    public function getEventsWithPriceFive(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -274,9 +276,8 @@ class Event extends AppModel {
             return $pricefiveEvents;
     }
 
-
-   //カテゴリデータ取得
-     public function getEventsWithParty(){
+    //カテゴリデータ取得
+    public function getEventsWithParty(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -292,7 +293,7 @@ class Event extends AppModel {
             return $partyEvents;
     }
 
-     public function getEventsWithStudy(){
+    public function getEventsWithStudy(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -308,7 +309,7 @@ class Event extends AppModel {
             return $studyEvents;
     }
 
-     public function getEventsWithFestival(){
+    public function getEventsWithFestival(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -324,7 +325,7 @@ class Event extends AppModel {
             return $festivalEvents;
     }
 
-     public function getEventsWithSports(){
+    public function getEventsWithSports(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -340,7 +341,7 @@ class Event extends AppModel {
             return $sportsEvents;
     }
 
-     public function getEventsWithCulture(){
+    public function getEventsWithCulture(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -356,7 +357,7 @@ class Event extends AppModel {
             return $cultureEvents;
     }
 
-     public function getEventsWithTrip(){
+    public function getEventsWithTrip(){
 
             $start = date('Y-m-d');
             // データの取得
@@ -371,8 +372,6 @@ class Event extends AppModel {
             //取得したデータを返却
             return $tripEvents;
     }
-
-
 
    	public $validate = array(
 		'user_id' => array(

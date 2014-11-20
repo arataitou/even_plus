@@ -36,7 +36,8 @@ class Event extends AppModel {
                  'foreignKey' => 'category_id',
                  'order' => 'Category.id ASC'
                  
-           ));
+           )
+           );
 
     //日付データ取得
      public function getEventsWithToday(){

@@ -91,7 +91,7 @@ class EventsController extends AppController {
         $trip_data = $this->Event->getEventsWithTrip();
         $this->set('trip', $trip_data);
 
-        $others_date = $this->Event->getEventsWithOthers();
+        //Paginatorの設定
         $start = date('Y-m-d');
         $this->Paginator->settings = array(
               'Event' => array(
@@ -103,7 +103,8 @@ class EventsController extends AppController {
         );
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
-        
+       
+        //パラメータの設定
         if (isset($this->params['named']['type'])){
             $type = $this->params['named']['type'];
             $this->set('types',$type);

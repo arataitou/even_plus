@@ -5,14 +5,11 @@ App::uses('AppModel', 'Model');
  *
  */
 class Participant extends AppModel {
-
 /**
  * Validation rules
  *
  * @var array
  */
-
-
     //Eventの結合 
     public $name = 'Participant';
     public $belongsTo = array(
@@ -23,10 +20,6 @@ class Participant extends AppModel {
             'dependent'     => true
         )
     );
-
-
-
-
 	public $validate = array(
 		'event_id' => array(
 			'numeric' => array(

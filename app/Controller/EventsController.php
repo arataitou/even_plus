@@ -8,50 +8,38 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-
 /**
  * Components
  *
  * @var array
  */
     public $components = array('Paginator', 'Session');
-
-
-
     //ユーザ制限
     public function isAuthorized($user){
         //登録済みユーザは投稿できる。
-        if($this->action ==='add'){
+        if ($this->action === 'add') {
             return true;
         }
-
         //投稿のオーナーは編集や削除ができる。
-        if(in_array($this->action,array('edit','delete'))){
+        if (in_array($this->action, array('edit', 'delete'))) {
             $eventId = (int)$this->request->params['pass'][0];
-            if($this->Event->isOwnedBy($eventId,$user['id'])){
+            if ($this->Event->isOwnedBy($eventId, $user['id'])) {
                 return true;
             }
         }
         return parent::isAuthorized($user);
     }
-
-
-
 /**
  * index method
  *
  * @return void
  */
     public function index() {
-
-        $status=$this->Auth->user();
-        $this->set('status',$status);
-
-
+        $status = $this->Auth->user();
+        $this->set('status', $status);
 		$this->Event->recursive = 0;
 		$this->set('events', $this->Paginator->paginate());
 	}
-
 /**
  * view method
  *
@@ -66,21 +54,15 @@ class EventsController extends AppController {
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
 		$this->set('event', $this->Event->find('first', $options));
 	}
-
 /**
  * add method
  *
  * @return void
  */
     public function add() {
-
-
-        $status=$this->Auth->user();
-        $this->set('status',$status);
-
-
+        $status = $this->Auth->user();
+        $this->set('status', $status);
         if ($this->request->is('post')) {
-            //下記一文を追加
             $this->request->data['Event']['user_id'] = $this->Auth->user('id');
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
@@ -88,7 +70,6 @@ class EventsController extends AppController {
 				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
 			}
         }
-
 	}
 
 /**
@@ -114,7 +95,6 @@ class EventsController extends AppController {
 			$this->request->data = $this->Event->find('first', $options);
 		}
 	}
-
 /**
  * delete method
  *

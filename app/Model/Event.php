@@ -6,19 +6,11 @@ App::uses('AppModel', 'Model');
  */
 class Event extends AppModel {
 
-
-public function isOwnedBy($event, $user) {
-    return $this->field('id', array('user_id' => $event, 'id' => $user)) !== false;
-}
-
-
-
 /**
  * Validation rules
  *
  * @var array
  */
-
 
 	public $validate = array(
 		'user_id' => array(
@@ -151,6 +143,11 @@ public function isOwnedBy($event, $user) {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-	);
+    );
+
+    public function isOwnedBy($event, $user) {
+    return $this->field('id', array('user_id' => $event, 'id' => $user)) !== false;
+    }
+
 }
 

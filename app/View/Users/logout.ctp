@@ -3,7 +3,5 @@
 <?php echo $this->Form->create('User'); ?>
     <fieldset>
         <legend><?php echo __('Logout comple!'); ?></legend>
-<?php	
-?>
     </fieldset>
 </div>

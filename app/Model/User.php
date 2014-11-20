@@ -1,9 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
-
-//SimplePasswordHasherクラスの定義
 App::uses('SimplePasswordHasher','Controller/Component/Auth');
-
 
 /**
  * User Model
@@ -17,17 +14,14 @@ class User extends AppModel {
  * @var string
  */
 
-    //ユーザーが保存されるときは毎回 SimplePasswordHasher 
-    //クラスを用いてパスワードがハッシュ化されます。
+    // ユーザ登録時にパスワードをハッシュ化
     public function beforeSave($options = array()){
         if(isset($this->data[$this->alias]['password'])){
             $passwordHasher = new SimplePasswordHasher();
             $this->data[$this->alias]['password'] = $passwordHasher->hash($this->data[$this->alias]['password']);
         }
         return true;
-    }
-
-    
+    }    
 
     public $validate = array(
         'name' => array(
@@ -46,10 +40,6 @@ class User extends AppModel {
    
     public function isOwnedBy($user, $user) {
     return $this->field('id', array('id' => $user, 'id' => $user)) !== false;
-}
-
-
-
-
+    }
 }
 

@@ -25,11 +25,11 @@ class UsersController extends AppController {
     }
     public function isAuthorized($user){ 
         //登録済みユーザは投稿できる。
-        if (in_array($this->action,array('add', 'index'))) { 
+        if (in_array($this->action, array('add', 'index'))) { 
             return true;
         }
         //投稿のオーナーは編集や削除ができる。
-        if (in_array($this->action,array('edit', 'delete'))) {
+        if (in_array($this->action, array('edit', 'delete'))) {
             $userId = (int)$this->request->params['pass'][0];
             if ($this->User->isOwnedBy($userId, $user['id'])) {
                 return true;
@@ -47,8 +47,6 @@ class UsersController extends AppController {
             'paramType' => 'querystring',
         )
     ); 
-
-
 /**
  * index method
  *
@@ -117,7 +115,6 @@ class UsersController extends AppController {
             $this->set('entryEventPast', $entryEventPast);
     	}
     }
-
 /**
  * view method
  *
@@ -132,7 +129,6 @@ class UsersController extends AppController {
 		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
 		$this->set('user', $this->User->find('first', $options));
 	}
-
 /**
  * add method
  *
@@ -151,8 +147,6 @@ class UsersController extends AppController {
 			}
 		}
 	}
-
-
 /**
  * edit method
  *
@@ -215,7 +209,6 @@ class UsersController extends AppController {
 		return $this->redirect(array('action' => 'logout'));
         }
     }
-
 /**
  * login method
  *
@@ -232,15 +225,14 @@ class UsersController extends AppController {
         	}
         }
     }
-
 /**
  * logout method
  *
  */
     public function logout() {
-        $status=$this->Auth->user();
+        $status = $this->Auth->user();
         $this->set('status', $status);
-        if(isset($status['id'])){
+        if (isset($status['id'])) {
             $this->redirect($this->Auth->logout());
         }
     }

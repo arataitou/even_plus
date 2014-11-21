@@ -32,7 +32,6 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
     public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('DebugKit.Toolbar');
     // Login,Logoutの認証
     public $components = array(
         'Session',
@@ -46,7 +45,8 @@ class AppController extends Controller {
             'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
             //ユーザ認証部
             'authorize' => array('Controller')
-        )
+        ),
+        'DebugKit.Toolbar'
     );
     public function isAuthorized($user) {
         //group_id=1はadmin

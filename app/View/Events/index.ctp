@@ -1,5 +1,5 @@
 <div>
-	<h2><?php echo $this->Html->link('Events',
+    <h2><?php echo $this->Html->link('Events',
                                          array('controller' => 'events','action' => 'index')
                                     ); ?>
     </h2>
@@ -7,7 +7,7 @@
 	<table>
 	<thead>
         <tr>
-                <th>日時</th>
+            <th>日時</th>
         </tr>
 	</thead>
 	<tbody>
@@ -31,7 +31,7 @@
 	<table>
 	<thead>
         <tr>
-                <th>エリア</th>
+            <th>エリア</th>
         </tr>
 	</thead>
 	<tbody>
@@ -59,7 +59,7 @@
 	<table>
 	<thead>
         <tr>
-                <th>予算</th>
+            <th>予算</th>
         </tr>
 	</thead>
 	<tbody>
@@ -90,7 +90,7 @@
 	<table>
 	<thead>
         <tr>
-                <th>カテゴリ</th>
+            <th>カテゴリ</th>
         </tr>
 	</thead>
 	<tbody>
@@ -120,9 +120,9 @@
     <div style = "clear:both;"></div>
     <?php if(isset($types)): ?>    
     <?php $event_signal = $types;
-      switch ($event_signal) {
-      //TODAY     
-      case 'today': ?>
+        switch ($event_signal) {
+        //TODAY     
+        case 'today': ?>
     <h2>Today's Events</h2>
     <?php foreach ($today as $today): ?>
     <div style = "float:left;width:23%;min-width:180px;background-color:#ddd;margin:10px;">
@@ -240,7 +240,7 @@
     <!--Midtown-->
     <?php case 'midtown': ?>
     <h2>Events in Midtown</h2>
-      <?php foreach ($midtown as $midtown): ?>
+    <?php foreach ($midtown as $midtown): ?>
     <div style = "float:left;width:23%;min-width:180px;background-color:#ddd;margin:10px;">  
         <p><?php echo $this->Html->link($midtown['Event']['event_title'],
                                             array('controller' => 'events', 'action' => 'view', $midtown['Event']['id']

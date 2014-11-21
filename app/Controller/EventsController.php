@@ -17,7 +17,7 @@ class EventsController extends AppController {
                    'Event' => array(
                        //ページに表示する数
                        'limit' => 3,
-                       //並び順 
+                       //並び順
                        'order' => array('created' => 'asc'),
                    )
         );
@@ -25,71 +25,71 @@ class EventsController extends AppController {
 	public function index(){
 
         //日付ソートのデータ
-        $todayData = $this->Event->getEventsWithToday();
-        $this->set('today', $todayData);
+        $todayEventsData = $this->Event->getEventsWithToday();
+        $this->set('today', $todayEventsData);
         
-        $tomorrowData = $this->Event->getEventsWithTomorrow();
-        $this->set('tomorrow', $tomorrowData);
+        $tomorrowEventsData = $this->Event->getEventsWithTomorrow();
+        $this->set('tomorrow', $tomorrowEventsData);
         
-        $oneWeekData = $this->Event->getEventsWithOneWeek();
-        $this->set('oneweek', $oneWeekData);
+        $oneWeekEventsData = $this->Event->getEventsWithOneWeek();
+        $this->set('oneweek', $oneWeekEventsData);
 
-        $twoWeeksData = $this->Event->getEventsWithTwoWeeks();
-        $this->set('twoweeks', $twoWeeksData);
+        $twoWeeksEventsData = $this->Event->getEventsWithTwoWeeks();
+        $this->set('twoweeks', $twoWeeksEventsData);
 
         //エリアソートのデータ
-        $downtownData = $this->Event->getEventsWithDowntown();
-        $this->set('downtown', $downtownData);
+        $downtownEventsData = $this->Event->getEventsWithDowntown();
+        $this->set('downtown', $downtownEventsData);
         
-        $midtownData = $this->Event->getEventsWithMidtown();
-        $this->set('midtown', $midtownData);
+        $midtownEventsData = $this->Event->getEventsWithMidtown();
+        $this->set('midtown', $midtownEventsData);
 
-        $uptownData = $this->Event->getEventsWithUptown();
-        $this->set('uptown', $uptownData);
+        $uptownEventsData = $this->Event->getEventsWithUptown();
+        $this->set('uptown', $uptownEventsData);
 
-        $provincesData = $this->Event->getEventsWithProvinces();
-        $this->set('provinces', $provincesData);
+        $provincesEventsData = $this->Event->getEventsWithProvinces();
+        $this->set('provinces', $provincesEventsData);
 
-        $othersData = $this->Event->getEventsWithOthers();
-        $this->set('others', $othersData);
+        $othersEventsData = $this->Event->getEventsWithOthers();
+        $this->set('others', $othersEventsData);
         
         //予算ソートのデータ
-        $freeData = $this->Event->getEventsWithFree();
-        $this->set('free', $freeData);
+        $freeEventsData = $this->Event->getEventsWithFree();
+        $this->set('free', $freeEventsData);
 
-        $priceOneData = $this->Event->getEventsWithPriceOne();
-        $this->set('priceone', $priceOneData);
+        $priceOneEventsData = $this->Event->getEventsWithPriceOne();
+        $this->set('priceone', $priceOneEventsData);
         
-        $priceTwoData = $this->Event->getEventsWithPriceTwo();
-        $this->set('pricetwo', $priceTwoData);
+        $priceTwoEventsData = $this->Event->getEventsWithPriceTwo();
+        $this->set('pricetwo', $priceTwoEventsData);
 
-        $priceThreeData = $this->Event->getEventsWithPriceThree();
-        $this->set('pricethree', $priceThreeData);
+        $priceThreeEventsData = $this->Event->getEventsWithPriceThree();
+        $this->set('pricethree', $priceThreeEventsData);
 
-        $priceFourData = $this->Event->getEventsWithPriceFour();
-        $this->set('pricefour', $priceFourData);
+        $priceFourEventsData = $this->Event->getEventsWithPriceFour();
+        $this->set('pricefour', $priceFourEventsData);
 
-        $priceFiveData = $this->Event->getEventsWithPriceFive();
-        $this->set('pricefive', $priceFiveData);
+        $priceFiveEventsData = $this->Event->getEventsWithPriceFive();
+        $this->set('pricefive', $priceFiveEventsData);
         
         //カテゴリソートのデータ
-        $partyData = $this->Event->getEventsWithParty();
-        $this->set('party', $partyData);
+        $partyEventsData = $this->Event->getEventsWithParty();
+        $this->set('party', $partyEventsData);
 
-        $studyData = $this->Event->getEventsWithStudy();
-        $this->set('study', $studyData);
+        $studyEventsData = $this->Event->getEventsWithStudy();
+        $this->set('study', $studyEventsData);
         
-        $festivalData = $this->Event->getEventsWithFestival();
-        $this->set('festival', $festivalData);
+        $festivalEventsData = $this->Event->getEventsWithFestival();
+        $this->set('festival', $festivalEventsData);
 
-        $sportsData = $this->Event->getEventsWithSports();
-        $this->set('sports', $sportsData);
+        $sportsEventsData = $this->Event->getEventsWithSports();
+        $this->set('sports', $sportsEventsData);
 
-        $cultureData = $this->Event->getEventsWithCulture();
-        $this->set('culture', $cultureData);
+        $cultureEventsData = $this->Event->getEventsWithCulture();
+        $this->set('culture', $cultureEventsData);
 
-        $tripData = $this->Event->getEventsWithTrip();
-        $this->set('trip', $tripData);
+        $tripEventsData = $this->Event->getEventsWithTrip();
+        $this->set('trip', $tripEventsData);
 
         //Paginatorの設定
         $start = date('Y-m-d');

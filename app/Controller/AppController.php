@@ -31,11 +31,8 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
-	//Html,From,Session機能を使う為、登録する。
     public $helpers = array('Html', 'Form', 'Session');
-    //public $components = array('DebugKit.Toolbar');
-
+    public $components = array('DebugKit.Toolbar');
     // Login,Logoutの認証
     public $components = array(
         'Session',
@@ -51,17 +48,13 @@ class AppController extends Controller {
             'authorize' => array('Controller')
         )
     );
-
-    //ユーザ制限
     public function isAuthorized($user) {
         //group_id=1はadmin
         if (isset($user['group_id']) && $user['group_id'] === '1') {
           return true;
        }
-       //デフォルトは拒否
        return false;
    }
-
     //AuthComponentに全てのコントローラの viewとsignup アクションでログインを必要としないように設定。
     public function beforeFilter() {
         $this->Auth->allow('view', 'signup');

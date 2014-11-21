@@ -71,7 +71,7 @@ class Event extends AppModel {
                   'Event.event_date <=' => $end
         );
         $order = array('Event.event_date' => 'asc');
-        $oneweekEvents = $this->find('all', compact('conditions','order'));
+        $oneweekEvents = $this->find('all', compact('conditions', 'order'));
         
         return $oneweekEvents;
     }
@@ -84,7 +84,7 @@ class Event extends AppModel {
                   'Event.event_date <=' => $end
         );
         $order = array('Event.event_date' => 'asc');
-        $twoweeksEvents = $this->find('all', compact('conditions','order'));
+        $twoweeksEvents = $this->find('all', compact('conditions', 'order'));
         
         return $twoweeksEvents;
     }
@@ -101,7 +101,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $downtownEvents = $this->find('all',compact('conditions','order'));
+        $downtownEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $downtownEvents;
@@ -117,7 +117,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $midtownEvents = $this->find('all',compact('conditions','order'));
+        $midtownEvents = $this->find('all',compact('conditions', 'order'));
         
         //取得したデータを返却
         return $midtownEvents;
@@ -133,7 +133,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $uptownEvents = $this->find('all',compact('conditions','order'));
+        $uptownEvents = $this->find('all',compact('conditions', 'order'));
         
         //取得したデータを返却
         return $uptownEvents;
@@ -149,7 +149,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $provincesEvents = $this->find('all',compact('conditions','order'));
+        $provincesEvents = $this->find('all',compact('conditions', 'order'));
         
         //取得したデータを返却
         return $provincesEvents;
@@ -164,7 +164,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $otherEvents = $this->find('all',compact('conditions','order'));
+        $otherEvents = $this->find('all',compact('conditions', 'order'));
         
         //取得したデータを返却
         return $otherEvents;
@@ -181,7 +181,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
 
-        $freeEvents = $this->find('all',compact('conditions','order'));
+        $freeEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $freeEvents;
@@ -198,7 +198,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $priceoneEvents = $this->find('all',compact('conditions','order'));
+        $priceoneEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $priceoneEvents;
@@ -215,7 +215,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $pricetwoEvents = $this->find('all',compact('conditions','order'));
+        $pricetwoEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $pricetwoEvents;
@@ -232,7 +232,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $pricethreeEvents = $this->find('all',compact('conditions','order'));
+        $pricethreeEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $pricethreeEvents;
@@ -249,7 +249,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $pricefourEvents = $this->find('all',compact('conditions','order'));
+        $pricefourEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $pricefourEvents;
@@ -266,7 +266,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $pricefiveEvents = $this->find('all',compact('conditions','order'));
+        $pricefiveEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $pricefiveEvents;
@@ -283,7 +283,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $partyEvents = $this->find('all',compact('conditions','order'));
+        $partyEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $partyEvents;
@@ -299,7 +299,7 @@ class Event extends AppModel {
                      );
        $order = array('Event.event_date' => 'asc');
        
-       $studyEvents = $this->find('all',compact('conditions','order'));
+       $studyEvents = $this->find('all',compact('conditions', 'order'));
 
        //取得したデータを返却
        return $studyEvents;
@@ -315,7 +315,7 @@ class Event extends AppModel {
                      );
        $order = array('Event.event_date' => 'asc');
        
-       $festivalEvents = $this->find('all',compact('conditions','order'));
+       $festivalEvents = $this->find('all',compact('conditions', 'order'));
 
        //取得したデータを返却
        return $festivalEvents;
@@ -331,7 +331,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $sportsEvents = $this->find('all',compact('conditions','order'));
+        $sportsEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $sportsEvents;
@@ -347,7 +347,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $cultureEvents = $this->find('all',compact('conditions','order'));
+        $cultureEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $cultureEvents;
@@ -363,7 +363,7 @@ class Event extends AppModel {
                       );
         $order = array('Event.event_date' => 'asc');
         
-        $tripEvents = $this->find('all',compact('conditions','order'));
+        $tripEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $tripEvents;

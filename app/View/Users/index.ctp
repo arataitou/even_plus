@@ -32,22 +32,22 @@
                 echo $this->Html->link('more', array('action' => 'index', '?'=>array('paginate'=> 'recent')));
             } ?>
     <table>
-    <h1><?php echo __('Particioated Events'); ?></h1>
-    <tr>
-        <td>Event Title</td>
-        <td>Event Date</td>
-        <td>Event Place</td>
-    </tr>
+        <h1><?php echo __('Particioated Events'); ?></h1>
+        <tr>
+            <td>Event Title</td>
+            <td>Event Date</td>
+            <td>Event Place</td>
+        </tr>
 
-	<?php foreach ($entryEventPast as $entryEventPasts): ?>
-    <tr>
-        <td><?php echo $this->Html->link($entryEventPasts['Event']['event_title'], array('controller' => 'events', 'action' => 'view', $entryEventPasts['Event']['id'])); ?>&nbsp;</td>
-        <td><?php echo $entryEventPasts['Event']['event_date']; ?>&nbsp;</td>
-        <td><?php echo $entryEventPasts['Event']['event_place']; ?>&nbsp;</td>
+	    <?php foreach ($entryEventPast as $entryEventPasts): ?>
+        <tr>
+            <td><?php echo $this->Html->link($entryEventPasts['Event']['event_title'], array('controller' => 'events', 'action' => 'view', $entryEventPasts['Event']['id'])); ?>&nbsp;</td>
+            <td><?php echo $entryEventPasts['Event']['event_date']; ?>&nbsp;</td>
+            <td><?php echo $entryEventPasts['Event']['event_place']; ?>&nbsp;</td>
             <?php  $eventCount ++; ?>
             <?php if ($eventCount == 3) { break; } ?>
-	</tr>
-    <?php endforeach; ?>
+	    </tr>
+        <?php endforeach; ?>
     </table>
     <?php if ($eventCount == 0) { echo __('Notting Event'); } ?>
     <?php if ($paginateBranch == 'past') {
@@ -68,7 +68,7 @@
         </tr>
     </tbody>
 </div>
-<div class="actions">
+<div class = "actions">
 	<h3><?php echo __('User Information'); ?></h3>
 	<ul>
 		<li><?php echo 'User_id  '.($status['id']); ?>&nbsp;</li>

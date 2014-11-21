@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+    public $uses = array('Event', 'Category', 'Area');
 
 /**
  * Components
@@ -139,18 +139,14 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-
-
 	public function edit($id = null) {
 		if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
 		}
-
 		if ($this->request->is(array('post', 'put'))) {
 
             $data = array('id' => $id);
             $this->Event->save($data); 
-
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -164,10 +160,9 @@ class EventsController extends AppController {
 
         $this->set('categories', $this->Category->find('list',
             array('fields' => array('Category.id', 'Category.category_title'))));
-        $this->set('areas',$this->Area->find('list',
+        $this->set('areas', $this->Area->find('list',
             array('fields' => array('Area.id', 'Area.area_name'))));
 	}
-
 /**
  * delete method
  *
@@ -180,10 +175,9 @@ class EventsController extends AppController {
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
         }
-
 		if ($this->request->is(array('post', 'put'))) {
 
-            $data = array('id' => $id,'status' => '1');
+            $data = array('id' => $id, 'status' => '1');
             $this->Event->save($data); 
 
 			if ($this->Event->save($this->request->data)) {

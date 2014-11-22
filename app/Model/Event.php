@@ -24,7 +24,7 @@ class Event extends AppModel {
             'order'      => 'Category.id ASC'
         )
     );
-    
+
     public $validate = array(
         'user_id' => array(
             'numeric' => array(
@@ -129,7 +129,7 @@ class Event extends AppModel {
     //日付データ取得
     public function getEventsWithToday(){
         $today = date("Y-m-d");
-        
+
         // データの取得
         $todayEvents = $this->find('all',array('conditions' =>
                                              array('event_date LIKE?' => '%'.$today.'%')
@@ -141,9 +141,9 @@ class Event extends AppModel {
 
     public function getEventsWithTomorrow(){
         $tomorrow = date("Y-m-d", strtotime("+1 day"));
-       
+
         // データの取得
-        $tomorrowEvents = $this->find('all',array('conditions' => 
+        $tomorrowEvents = $this->find('all',array('conditions' =>
                                                 array('event_date LIKE?' => '%'.$tomorrow.'%')
                                             )
                           );
@@ -153,27 +153,27 @@ class Event extends AppModel {
 
     public function getEventsWithOneWeek(){
         $start = date('Y-m-d');
-        $end =  date('Y-m-d',strtotime("+7 day"));    
+        $end =  date('Y-m-d',strtotime("+7 day"));
         $conditions = array(
                   'Event.event_date >=' => $start,
                   'Event.event_date <=' => $end
         );
         $order = array('Event.event_date' => 'asc');
         $oneweekEvents = $this->find('all', compact('conditions', 'order'));
-        
+
         return $oneweekEvents;
     }
 
     public function getEventsWithTwoWeeks(){
         $start = date('Y-m-d');
-        $end =  date('Y-m-d',strtotime("+14 day"));    
+        $end =  date('Y-m-d',strtotime("+14 day"));
         $conditions = array(
                   'Event.event_date >=' => $start,
                   'Event.event_date <=' => $end
         );
         $order = array('Event.event_date' => 'asc');
         $twoweeksEvents = $this->find('all', compact('conditions', 'order'));
-        
+
         return $twoweeksEvents;
     }
 
@@ -182,13 +182,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'area_id >=' => 1,
                           'area_id <=' => 3,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $downtownEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -198,15 +198,15 @@ class Event extends AppModel {
     public function getEventsWithMidtown(){
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'area_id >=' => 4,
                           'area_id <=' => 6,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $midtownEvents = $this->find('all',compact('conditions', 'order'));
-        
+
         //取得したデータを返却
         return $midtownEvents;
     }
@@ -214,15 +214,15 @@ class Event extends AppModel {
     public function getEventsWithUptown(){
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'area_id >=' => 7,
                           'area_id <=' => 10,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $uptownEvents = $this->find('all',compact('conditions', 'order'));
-        
+
         //取得したデータを返却
         return $uptownEvents;
     }
@@ -230,30 +230,30 @@ class Event extends AppModel {
     public function getEventsWithProvinces(){
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'area_id >=' => 11,
                           'area_id <=' => 16,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $provincesEvents = $this->find('all',compact('conditions', 'order'));
-        
+
         //取得したデータを返却
         return $provincesEvents;
     }
-    
+
     public function getEventsWithOthers(){
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'area_id' => 17,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $otherEvents = $this->find('all',compact('conditions', 'order'));
-        
+
         //取得したデータを返却
         return $otherEvents;
     }
@@ -263,7 +263,7 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price' => 0,
                           'Event.event_date >=' => $start
                       );
@@ -279,13 +279,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price >=' => 1,
                           'event_price <=' => 99,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $priceoneEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -296,13 +296,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price >=' => 100,
                           'event_price <=' => 199,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $pricetwoEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -313,13 +313,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price >=' => 200,
                           'event_price <=' => 299,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $pricethreeEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -330,13 +330,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price >=' => 300,
                           'event_price <=' => 499,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $pricefourEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -347,13 +347,13 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'event_price >=' => 500,
                           'event_price <=' => 800,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $pricefiveEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -365,12 +365,12 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'category_id' => 1,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $partyEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -381,12 +381,12 @@ class Event extends AppModel {
 
        $start = date('Y-m-d');
        // データの取得
-       $conditions = array( 
+       $conditions = array(
                          'category_id' => 2,
                          'Event.event_date >=' => $start
                      );
        $order = array('Event.event_date' => 'asc');
-       
+
        $studyEvents = $this->find('all',compact('conditions', 'order'));
 
        //取得したデータを返却
@@ -397,12 +397,12 @@ class Event extends AppModel {
 
        $start = date('Y-m-d');
        // データの取得
-       $conditions = array( 
+       $conditions = array(
                          'category_id' => 3,
                          'Event.event_date >=' => $start
                      );
        $order = array('Event.event_date' => 'asc');
-       
+
        $festivalEvents = $this->find('all',compact('conditions', 'order'));
 
        //取得したデータを返却
@@ -413,12 +413,12 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'category_id' => 4,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $sportsEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -429,12 +429,12 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'category_id' => 5,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $cultureEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
@@ -445,15 +445,15 @@ class Event extends AppModel {
 
         $start = date('Y-m-d');
         // データの取得
-        $conditions = array( 
+        $conditions = array(
                           'category_id' => 6,
                           'Event.event_date >=' => $start
                       );
         $order = array('Event.event_date' => 'asc');
-        
+
         $tripEvents = $this->find('all',compact('conditions', 'order'));
 
         //取得したデータを返却
         return $tripEvents;
     }
-  }
+}

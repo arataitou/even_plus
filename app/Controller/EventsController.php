@@ -124,7 +124,7 @@ class EventsController extends AppController {
                 )
             )
         );
-        $this->set('areas',$this->Area->find(
+        $this->set('areas', $this->Area->find(
             'list',
             array(
                 'fields' => array('Area.id', 'Area.area_name')
@@ -144,7 +144,6 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
-
             $data = array('id' => $id);
             $this->Event->save($data); 
 			if ($this->Event->save($this->request->data)) {
@@ -157,7 +156,6 @@ class EventsController extends AppController {
 			$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
 			$this->request->data = $this->Event->find('first', $options);
 		}
-
         $this->set('categories', $this->Category->find('list',
             array('fields' => array('Category.id', 'Category.category_title'))));
         $this->set('areas', $this->Area->find('list',
@@ -176,10 +174,8 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
         }
 		if ($this->request->is(array('post', 'put'))) {
-
             $data = array('id' => $id, 'status' => '1');
             $this->Event->save($data); 
-
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been deleted.'));
 				return $this->redirect(array('action' => 'index'));

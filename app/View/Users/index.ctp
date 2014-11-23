@@ -68,7 +68,7 @@
         </tr>
     </tbody>
 </div>
-<div class = "actions">
+<div class="actions">
 	<h3><?php echo __('User Information'); ?></h3>
 	<ul>
 		<li><?php echo 'User_id  '.($status['id']); ?>&nbsp;</li>

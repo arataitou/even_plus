@@ -78,7 +78,7 @@ class Participant extends AppModel {
         'Event' => array(
             'className'     => 'Event',
             'foreignKey'    => 'event_id',
-            'order' => 'event_date asc',
+            'order'         => 'event_date asc',
             'dependent'     => true
         )
     );

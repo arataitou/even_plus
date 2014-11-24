@@ -110,3 +110,12 @@
     </ul>
     <?php endif; ?>
     <!--ここまで....answersをquestionごとに個別で表示させるためのswitch-->
+
+    <h2>Action</h2>
+<!--ログイン済みのユーザーのみ参加ボタン表示-->
+    <ul>
+        <?php 
+                echo '<li>'.$this->Html->link(__('cancel'), 'cancel/'.$event['Event']['id']).'</li>';
+        ?>
+    </ul>
+</div>

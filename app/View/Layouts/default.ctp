@@ -13,13 +13,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
-<<<<<<< HEAD
-
-=======
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,51 +26,28 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-    ?>
-
-
-	<?php 
-
-		// 11/04KS追記
 		//Topのロゴ (/even_plus/top/index) へLink
 		echo '<a href='.'/even_plus/top/index'.'><h1>'."Even+".'</h1></a>';
-
-
-         if(isset($status['id']) && ($status['group_id']=1)){
-
-		    //Bottum表示各ページへのLink
+         if (isset($status['id']) && ($status['group_id'] == 1)) {
+		    //Button表示各ページへのLink
 		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
 		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
             echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
-
          }
-        if(isset($status['id']) && ($status['group_id']=0)){
 
+        if (isset($status['id']) && ($status['group_id'] == 0)) {
 		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
 		    echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
 		    echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
-
         }
-        if(!isset($status['id'])){
 
+        if (!isset($status['id'])) {
             echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
-            echo $this->Html->link('Login','/users/login',array('class'=>'button'));
-            echo $this->Html->link('Signup','/users/signup',array('class'=>'button'));
-
+            echo $this->Html->link('Login', '/users/login', array('class'=>'button'));
+            echo $this->Html->link('Signup','/users/signup', array('class'=>'button'));
         }
-
-
-debug($status);
-
-            
-
-	?>
-
-
-	<?php 
-		// 11/04KS追記
 		//Topのロゴ (/even_plus/top/index) へLink
 		echo '<a href='.'/even_plus/top/index'.'><h1>'."Even+".'</h1></a>';
 
@@ -87,40 +58,21 @@ debug($status);
 		echo $this->Html->link('Signup', '/users/Signup', array('class'=>'button'));
 		echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
 		echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
-
 	?>
 </head>
 <body>
 	<div id="container">
 		<div id="header">
-
-<<<<<<< HEAD
-=======
-
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 		</div>
 		<div id="content">
-
 			<?php echo $this->Session->flash(); ?>
-
 			<?php echo $this->fetch('content'); ?>
 		</div>
 		<div id="footer">
-
-
 			<?php 
-<<<<<<< HEAD
-=======
-
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 				echo $this->Html->link('Home', '/tops/index', array('class'=>'button'));
 			?>
-
 		</div>
 	</div>
-<<<<<<< HEAD
-	<?php  echo $this->element('sql_dump'); ?>
-=======
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 </body>
 </html>

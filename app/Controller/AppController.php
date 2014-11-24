@@ -31,17 +31,8 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
-<<<<<<< HEAD
-
-	//Html,From,Session機能を使う為、登録する。
     public $helpers = array('Html', 'Form', 'Session');
-    //public $components = array('DebugKit.Toolbar');
-
-
-
     // Login,Logoutの認証
-    // LoginとLogoutのactionが実行された後に読み込まれるURLを設定
     public $components = array(
         'Session',
         'Auth' => array(
@@ -53,32 +44,19 @@ class AppController extends Controller {
             'loginRedirect' => array('controller' => 'tops', 'action' => 'index'),
             'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
             //ユーザ認証部
-            'authorize'=> array('Controller')
-        )
+            'authorize' => array('Controller')
+        ),
+        'DebugKit.Toolbar'
     );
-
-
-    //ユーザ制限
     public function isAuthorized($user) {
         //group_id=1はadmin
-        if(isset($user['group_id']) && $user['group_id'] ==='1'){
+        if (isset($user['group_id']) && $user['group_id'] === '1') {
           return true;
        }
-       //デフォルトは拒否
        return false;
    }
-
-
-
     //AuthComponentに全てのコントローラの viewとsignup アクションでログインを必要としないように設定。
     public function beforeFilter() {
-        $this->Auth->allow('view','signup');
+        $this->Auth->allow('view', 'signup');
     }
-
-=======
-	//Html,From,Session機能を使う為、登録する。
-    public $helpers = array('Html', 'Form', 'Session');
-    public $components = array('DebugKit.Toolbar');
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
-
 }

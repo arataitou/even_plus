@@ -27,24 +27,21 @@ class EventsController extends AppController {
  *
  * @var array
  */
-
     //ユーザ制限
     public function isAuthorized($user){
         //登録済みユーザは投稿できる。
-        if($this->action ==='add'){
+        if ($this->action === 'add') {
             return true;
         }
-
         //投稿のオーナーは編集や削除ができる。
-        if(in_array($this->action,array('edit','delete'))){
+        if (in_array($this->action, array('edit', 'delete'))) {
             $eventId = (int)$this->request->params['pass'][0];
-            if($this->Event->isOwnedBy($eventId,$user['id'])){
+            if ($this->Event->isOwnedBy($eventId, $user['id'])) {
                 return true;
             }
         }
         return parent::isAuthorized($user);
     }
-
 /**
  * index method
  *
@@ -317,7 +314,6 @@ class EventsController extends AppController {
 			$this->request->data = $this->Event->find('first', $options);
 		}
 	}
-
 /**
  * delete method
  *

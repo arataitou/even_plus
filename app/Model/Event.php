@@ -4,7 +4,6 @@ App::uses('AppModel', 'Model');
  * Event Model
  *
  */
-
 class Event extends AppModel {
     public $name ='Event';
     public $belongsTo = array(

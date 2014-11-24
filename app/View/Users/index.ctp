@@ -1,64 +1,77 @@
 <div class="users index">
-	<h2><?php echo __('Users'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+    <h2><?php echo __('ようこそ'.$status['name'].'さん'); ?></h2>
 	<thead>
+	<table>
+    <h1><?php echo __('Entry Events'); ?></h1>
     <tr>
+        <td>Event Title</td>
+        <td>Event Date</td>
+        <td>Event Place</td>
+    </tr>
+    <?php $entryEventCount = 0; ?>    
+    <?php $eventCount = 0; ?>
 
-    <fieldset>
-    
-        <?php  $labelName = (('ようこそ'),$status['name']);?>
-        <legend><?php echo __($labelName); ?></legend>
-<?php	
-?>
-    </fieldset>
-
-
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
-			<th><?php echo $this->Paginator->sort('group_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('password'); ?></th>
-			<th><?php echo $this->Paginator->sort('name'); ?></th>
-			<th><?php echo $this->Paginator->sort('created'); ?></th>
-			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th><?php echo $this->Paginator->sort('del_flg'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+	<?php foreach ($entryEvent as $entryEvents): ?>
+    <tr>
+        <td><?php echo $this->Html->link($entryEvents['Event']['event_title'], array('controller' => 'events', 'action' => 'view', $entryEvents['Event']['id'])); ?>&nbsp;</td>
+        <td><?php echo $entryEvents['Event']['event_date']; ?>&nbsp;</td>
+        <td><?php echo $entryEvents['Event']['event_place']; ?>&nbsp;</td>
+            <?php  $entryEventCount ++; ?>
+            <?php if ($entryEventCount == 3) { break; } ?>
 	</tr>
-	</thead>
-	<tbody>
-	<?php foreach ($users as $user): ?>
-	<tr>
-		<td><?php echo h($user['User']['id']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['group_id']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['password']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['name']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['created']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['modified']); ?>&nbsp;</td>
-		<td><?php echo h($user['User']['del_flg']); ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $user['User']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $user['User']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $user['User']['id']), array(), __('Are you sure you want to delete # %s?', $user['User']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-	</tbody>
-	</table>
-	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page {:page} of {:pages}, showing {:current} records out of {:count} total, starting on record {:start}, ending on {:end}')
-	));
-	?>	</p>
-	<div class="paging">
-<!-- 	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-	?> -->
-	</div>
+    <?php endforeach; ?>
+    </table>
+        <?php if ($entryEventCount == 0) {echo __('Notting Event'); } ?>
+        <?php if ($paginateBranch == 'recent') {
+                echo $this->Paginator->prev('< 前へ', array(), null, array('class' => 'disabled'));
+                echo $this->Paginator->numbers();
+                echo $this->Paginator->next('次へ >', array(), null, array('class' => 'disabled'));
+                echo $this->Paginator->counter(array('format' => '全%count%件'));
+                echo $this->Paginator->counter(array('format' => '{:page}/{:pages}ページを表示'));
+            } else {
+                echo $this->Html->link('more', array('action' => 'index', '?'=>array('paginate'=> 'recent')));
+            } ?>
+    <table>
+        <h1><?php echo __('Particioated Events'); ?></h1>
+        <tr>
+            <td>Event Title</td>
+            <td>Event Date</td>
+            <td>Event Place</td>
+        </tr>
+
+	    <?php foreach ($entryEventPast as $entryEventPasts): ?>
+        <tr>
+            <td><?php echo $this->Html->link($entryEventPasts['Event']['event_title'], array('controller' => 'events', 'action' => 'view', $entryEventPasts['Event']['id'])); ?>&nbsp;</td>
+            <td><?php echo $entryEventPasts['Event']['event_date']; ?>&nbsp;</td>
+            <td><?php echo $entryEventPasts['Event']['event_place']; ?>&nbsp;</td>
+            <?php  $eventCount ++; ?>
+            <?php if ($eventCount == 3) { break; } ?>
+	    </tr>
+        <?php endforeach; ?>
+    </table>
+    <?php if ($eventCount == 0) { echo __('Notting Event'); } ?>
+    <?php if ($paginateBranch == 'past') {
+                echo $this->Paginator->prev('< 前へ', array(), null, array('class' => 'disabled'));
+                echo $this->Paginator->numbers();
+                echo $this->Paginator->next('次へ >', array(), null, array('class' => 'disabled'));
+                echo $this->Paginator->counter(array('format' => '全%count%件'));
+                echo $this->Paginator->counter(array('format' => '{:page}/{:pages}ページを表示'));
+            } else {
+                echo $this->Html->link('more', array('action' => 'index', '?'=>array('paginate'=> 'past')));
+            } ?>
+    <tbody>
+    	<tr>
+            <td class="actions">
+                <?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $status['id'])); ?>
+                <?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $status['id']), array(), __('Are you sure you want to delete # %s?', $status['id'])); ?>
+            </td>
+        </tr>
+    </tbody>
 </div>
 <div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
+	<h3><?php echo __('User Information'); ?></h3>
 	<ul>
-		<li><?php echo $this->Html->link(__('New User'), array('action' => 'add')); ?></li>
+		<li><?php echo 'User_id  '.($status['id']); ?>&nbsp;</li>
+		<li><?php echo 'User_name '.($status['name']); ?>&nbsp;</li>
 	</ul>
 </div>

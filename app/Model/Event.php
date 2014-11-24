@@ -57,7 +57,7 @@ class Event extends AppModel {
 			'between' => array(
 				'rule' => array('between', 5, 50),
 				'message' => 'Between 5 to 50 characters'),
-
+        ),
         //EventControllerでValidation
         'event_date' => array(
             'datetime' => array(
@@ -97,8 +97,8 @@ class Event extends AppModel {
             'bio' => array(
                 'rule' => array('between', 50, 300),
                 'message' => '50文字以上、300文字以下で入力して下さい。'
-                )
-            ),
+            )
+        ),
         'question_1' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty')

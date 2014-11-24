@@ -26,6 +26,4 @@ class Area extends AppModel {
 			),
 		),
 	);
-
-
 }

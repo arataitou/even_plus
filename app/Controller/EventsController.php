@@ -22,15 +22,11 @@ class EventsController extends AppController {
         )
     );
 
-<<<<<<< HEAD
 /**
  * Components
  *
  * @var array
  */
-    public $components = array('Paginator', 'Session');
-
-
 
     //ユーザ制限
     public function isAuthorized($user){
@@ -49,8 +45,6 @@ class EventsController extends AppController {
         return parent::isAuthorized($user);
     }
 
-
-
 /**
  * index method
  *
@@ -61,13 +55,6 @@ class EventsController extends AppController {
         $status=$this->Auth->user();
         $this->set('status',$status);
 
-
-		$this->Event->recursive = 0;
-		$this->set('events', $this->Paginator->paginate());
-	}
-=======
-	public function index(){
-
         $order = array(
                      'order' => 'event_date asc',
                      'limit' => 4,
@@ -76,22 +63,93 @@ class EventsController extends AppController {
 		$this->set('events', $eventList);
 
         //日付ソートのデータ
-        $today_date = $this->Event->getEventsWithToday();
-        $this->set('today', $today_date);
+        $todayEventsData = $this->Event->getEventsWithToday();
+        $this->set('today', $todayEventsData);
+        
+        $tomorrowEventsData = $this->Event->getEventsWithTomorrow();
+        $this->set('tomorrow', $tomorrowEventsData);
+        
+        $oneWeekEventsData = $this->Event->getEventsWithOneWeek();
+        $this->set('oneweek', $oneWeekEventsData);
 
-        $tomorrow_date = $this->Event->getEventsWithTomorrow();
-        $this->set('tomorrow', $tomorrow_date);
+        $twoWeeksEventsData = $this->Event->getEventsWithTwoWeeks();
+        $this->set('twoweeks', $twoWeeksEventsData);
 
-        $this->Paginator->settings = $this->paginate;
+        //エリアソートのデータ
+        $downtownEventsData = $this->Event->getEventsWithDowntown();
+        $this->set('downtown', $downtownEventsData);
+        
+        $midtownEventsData = $this->Event->getEventsWithMidtown();
+        $this->set('midtown', $midtownEventsData);
+
+        $uptownEventsData = $this->Event->getEventsWithUptown();
+        $this->set('uptown', $uptownEventsData);
+
+        $provincesEventsData = $this->Event->getEventsWithProvinces();
+        $this->set('provinces', $provincesEventsData);
+
+        $othersEventsData = $this->Event->getEventsWithOthers();
+        $this->set('others', $othersEventsData);
+        
+        //予算ソートのデータ
+        $freeEventsData = $this->Event->getEventsWithFree();
+        $this->set('free', $freeEventsData);
+
+        $priceOneEventsData = $this->Event->getEventsWithPriceOne();
+        $this->set('priceone', $priceOneEventsData);
+        
+        $priceTwoEventsData = $this->Event->getEventsWithPriceTwo();
+        $this->set('pricetwo', $priceTwoEventsData);
+
+        $priceThreeEventsData = $this->Event->getEventsWithPriceThree();
+        $this->set('pricethree', $priceThreeEventsData);
+
+        $priceFourEventsData = $this->Event->getEventsWithPriceFour();
+        $this->set('pricefour', $priceFourEventsData);
+
+        $priceFiveEventsData = $this->Event->getEventsWithPriceFive();
+        $this->set('pricefive', $priceFiveEventsData);
+        
+        //カテゴリソートのデータ
+        $partyEventsData = $this->Event->getEventsWithParty();
+        $this->set('party', $partyEventsData);
+
+        $studyEventsData = $this->Event->getEventsWithStudy();
+        $this->set('study', $studyEventsData);
+        
+        $festivalEventsData = $this->Event->getEventsWithFestival();
+        $this->set('festival', $festivalEventsData);
+
+        $sportsEventsData = $this->Event->getEventsWithSports();
+        $this->set('sports', $sportsEventsData);
+
+        $cultureEventsData = $this->Event->getEventsWithCulture();
+        $this->set('culture', $cultureEventsData);
+
+        $tripEventsData = $this->Event->getEventsWithTrip();
+        $this->set('trip', $tripEventsData);
+
+        //Paginatorの設定
+        $start = date('Y-m-d');
+        $this->Paginator->settings = array(
+              'Event' =>
+              array(
+                     'order' => 'Event.event_date asc',
+                     'limit' => 8,
+                     'conditions' => array(
+                         'Event.event_date >=' => $start)
+              )
+        );
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
-
-        $type = $this->params['named']['type'];
-        $this->set('types', $type);
-
+       
+        //パラメータの設定
+        if (isset($this->params['named']['type'])){
+            $type = $this->params['named']['type'];
+            $this->set('types',$type);
+        }
     }
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
-
+    
 /**
  * view method
  *
@@ -149,25 +207,9 @@ class EventsController extends AppController {
  * @return void
  */
     public function add() {
-<<<<<<< HEAD
-
-
         $status=$this->Auth->user();
         $this->set('status',$status);
 
-
-        if ($this->request->is('post')) {
-            //下記一文を追加
-            $this->request->data['Event']['user_id'] = $this->Auth->user('id');
-			if ($this->Event->save($this->request->data)) {
-				$this->Session->setFlash(__('The event has been saved.'));
-			} else {
-				$this->Session->setFlash(__('The event could not be saved. Please, try again.'));
-			}
-        }
-
-	}
-=======
         if ($this->request->is('post')) {
             $eventMonth = $this->request->data["Event"]["month"];
             $eventDay = $this->request->data["Event"]["day"];
@@ -175,7 +217,6 @@ class EventsController extends AppController {
             $eventHour = $this->request->data["Event"]["hour"];
             $eventMin = $this->request->data["Event"]["min"];
             $eventMeridation = $this->request->data["Event"]["meridian"];
->>>>>>> fa629de9759bbec7d2763401f4cede9d845dd0bc
 
             if ($eventMonth == null || $eventDay == null || $eventYear == null || $eventHour == null || $eventMin == null || $eventMeridation = null) {
                 $this->Session->setFlash(__('日時をすべて選択してください'));//日時のValidation

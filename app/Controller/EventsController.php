@@ -188,15 +188,15 @@ class EventsController extends AppController {
             ));
         $this->set('participantsRandom', $participants);
 
-        /*
+        
         //login済みのユーザーだった場合「参加ボタン」を表示するため、viewにuser_idをset
-        if ($userId = $this->Auth->user('id')){
+        $userId = $this->Auth->user('id');
+        if ($userId){
             $this->set('userId', $userId);
             if ($userId == '1' || $this->Event->data["user_id"]){
-                $this->set('flagUd', "haveAuthority");
+                $this->set('flagUserDelete', "haveAuthority");
             }
         }
-         */
     }
 /**
  * add method

@@ -109,4 +109,21 @@
     ?>
     </ul>
     <?php endif; ?>
-    <!--ここまで....answersをquestionごとに個別で表示させるためのswitch-->
+<!--ここまで....answersをquestionごとに個別で表示させるためのswitch-->
+
+<!--ログイン済みのユーザーのみ参加ボタン表示-->
+    <ul>    
+        <?php if (isset($userId)){ 
+            echo '<li>'.$this->Html->link(__('Join Event'), array('action' => 'join')).'</li>'; 
+            }
+        ?>
+
+<!--管理者とイベント作成者のみ以下の処理が表示-->
+        <?php if ($flagUserDelete){
+            echo '<li>'.$this->Html->link(__('Edit Event'), array('action' => 'edit', $event['Event']['id'])).'</li>';
+           // echo '<li>'.$this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), array(), __('Are you sure you want to delete # %s?', $event['Event']['id'])).'</li>';
+            }
+        ?>
+    </ul>
+</div>
+

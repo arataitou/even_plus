@@ -8,9 +8,9 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+    public $uses = array('Event', 'Category', 'Area', 'User', 'Participants');
     public $helpers = array('Paginator');
-    public $components = array('Session','Paginator');
+    public $components = array('Session', 'Paginator');
     //Paginatorの設定
     public $paginate = array(
         //モデルの指定
@@ -50,7 +50,7 @@ class EventsController extends AppController {
     public function index() {
 
         $status=$this->Auth->user();
-        $this->set('status',$status);
+        $this->set('status', $status);
 
         $order = array(
                      'order' => 'event_date asc',

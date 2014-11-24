@@ -1,37 +1,37 @@
 <div class="events view">
-	<h2><?php echo h($event['Event']['event_title']); ?></h2>
-	&nbsp;
+    <h2><?php echo h($event['Event']['event_title']); ?></h2>
+    &nbsp;
     <h3><?php echo __('Event Plan'); ?></h3>
-	<dl>
-		<dt><?php echo __('Date'); ?></dt>
+    <dl>
+        <dt><?php echo __('Date'); ?></dt>
         <dd>
-			<?php echo h($event['Event']['event_date']); ?>
-			&nbsp;
+            <?php echo h($event['Event']['event_date']); ?>
+            &nbsp;
         </dd>
-		<dt><?php echo __('Area'); ?></dt>
-		<dd>
-			<?php echo h($event['Area']['area_name']); ?>
-			&nbsp;
+        <dt><?php echo __('Area'); ?></dt>
+        <dd>
+            <?php echo h($event['Area']['area_name']); ?>
+            &nbsp;
         </dd>
-		<dt><?php echo __('Place'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['event_place']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Address'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['event_address']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Price'); ?></dt>
-		<dd>
-			<?php echo h($event['Event']['event_price']); ?>
-			&nbsp;
+        <dt><?php echo __('Place'); ?></dt>
+        <dd>
+            <?php echo h($event['Event']['event_place']); ?>
+            &nbsp;
         </dd>
-		<dt><?php echo __('Category'); ?></dt>
-		<dd>
-			<?php echo h($event['Category']['category_title']); ?>
-			&nbsp;
+        <dt><?php echo __('Address'); ?></dt>
+        <dd>
+            <?php echo h($event['Event']['event_address']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Price'); ?></dt>
+        <dd>
+            <?php echo h($event['Event']['event_price']); ?>
+            &nbsp;
+        </dd>
+        <dt><?php echo __('Category'); ?></dt>
+        <dd>
+            <?php echo h($event['Category']['category_title']); ?>
+            &nbsp;
         </dd>
         <dt><?php echo __('Organizer')?></dt>
         <dd>
@@ -110,12 +110,3 @@
     </ul>
     <?php endif; ?>
     <!--ここまで....answersをquestionごとに個別で表示させるためのswitch-->
-
-    <h2>Action</h2>
-<!--ログイン済みのユーザーのみ参加ボタン表示-->
-    <ul>
-        <?php 
-                echo '<li>'.$this->Html->link(__('cancel'), 'cancel/'.$event['Event']['id']).'</li>';
-        ?>
-    </ul>
-</div>

@@ -219,11 +219,11 @@ class EventsController extends AppController {
         $options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
         $eventInfo = $this->set('eventInfo', $this->Event->find('first', $options));
 
-        if(!$this->Event->exists()){
+        if (!$this->Event->exists()) {
             throw new NotFoundException(__('Invalid event'));
         }
 
-        if($this->request->is('post')){
+        if ($this->request->is('post')) {
             $data = array(
                 "event_id" => $id,
                 //"user_id" => $this->Auth->user('id'); 参加者のuser_id挿入するべし
@@ -234,9 +234,9 @@ class EventsController extends AppController {
             );
 
             $this->Participant->create();
-            if($this->Participant->save($data)){
+            if ($this->Participant->save($data)) {
                 $this->Session->setFlash(__('The event has been saved.'));
-            }else{
+            } else {
                 $this->Session->setFlash(__('The event could not be joined. Please, try again.'));
             }
         }

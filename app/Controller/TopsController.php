@@ -21,8 +21,16 @@ class TopsController extends AppController {
         'order' => array('created' => 'asc'),
         )
     );
+	public function beforeFilter() {
+		parent::beforeFilter();
+    	$this->Auth->allow('index');
+    }
+    public function index() {
+        //Login user情報を取得
+        $status = $this->Auth->user();
+        $status['user_id'] = $status['id'];
+        $this->set('status', $status);
 
-    public function index(){
         $start = date('Y-m-d');
         $this->Paginator->settings = array(
             'Event' => array(
@@ -35,10 +43,6 @@ class TopsController extends AppController {
         );
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
-    }
-
-    public function beforeFilter() {
-        $this->Auth->allow('index');
     }
 }
 

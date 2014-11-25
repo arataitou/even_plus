@@ -48,7 +48,7 @@
         <?php switch($_GET['moreanswers']){
                 case '1':
                     echo '<h3>'.__('Q1 ').$event['Event']['question_1'].'</h3>';
-                    foreach($participantsEach as $each){
+                    foreach ($participantsEach as $each) {
                         echo '<p>'.$each['Participants']['answer_1'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
@@ -57,7 +57,7 @@
                     break; 
                 case '2' :
                     echo '<h3>'.__('Q2 ').$event['Event']['question_2'].'</h3>';
-                    foreach($participantsEach as $each){
+                    foreach ($participantsEach as $each) {
                         echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
@@ -66,7 +66,7 @@
                     break; 
                 case '3' :
                     echo '<h3>'.__('Q3 ').$event['Event']['question_3'].'</h3>';
-                    foreach($participantsEach as $each){
+                    foreach ($participantsEach as $each) {
                         echo '<p>'.$each['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$each['Participants']['user_id']], '/users/view/'.$each['Participants']['user_id']).'</p>';
                     }
                     echo $this->Paginator->prev('< Previous', array(), null, array('class' => 'prev disabled'));
@@ -80,21 +80,21 @@
     <?php else: ?>
     <h3><?php echo __('Q1 ').$event['Event']['question_1']; ?></h3>
             <?php
-                foreach($participantsRandom as $random){
+                foreach ($participantsRandom as $random) {
                      echo '<p>'.$random['Participants']['answer_1'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
             }
             ?>
     <p><?php echo $this->Html->link('Check more answers', '/events/view/'.$event['Event']['id'].'?moreanswers=1'); ?></p>
     <h3><?php echo __('Q2 ').$event['Event']['question_2']; ?></h3>
             <?php
-                foreach($participantsRandom as $random){
+                foreach ($participantsRandom as $random) {
                     echo '<p>'.$random['Participants']['answer_2'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
                 }
             ?>
     <p><?php echo $this->Html->link('Check more answers', '/events/view/'.$event['Event']['id'].'?moreanswers=2'); ?></p>
     <h3><?php echo __('Q3 ').$event['Event']['question_3']; ?></h3>
             <?php
-                foreach($participantsRandom as $random){
+                foreach ($participantsRandom as $random) {
                     echo '<p>'.$random['Participants']['answer_3'].'...'.$this->Html->link($userIdAndName[$random['Participants']['user_id']], '/users/view/'.$random['Participants']['user_id']).'</p>';
                 }
             ?>
@@ -103,10 +103,24 @@
     <h3><?php echo __('Participants List'); ?></h3>
     <ul>
     <?php
-        foreach($participantsEach as $participant){
+        foreach ($participantsEach as $participant) {
             echo '<li>'.$this->Html->link($userIdAndName[$participant['Participants']['user_id']], '/users/view/'.$participant['Participants']['user_id']).'</li>';
         }
     ?>
     </ul>
     <?php endif; ?>
 <!--ここまで....answersをquestionごとに個別で表示させるためのswitch-->
+
+<!--ログイン済みのユーザーのみ参加ボタン表示-->
+        <?php if (isset($userId)) { 
+            echo $this->Html->link(__('Join Event'), array('action' => 'join')).'</br>'; 
+            }
+        ?>
+<!--管理者とイベント作成者のみ以下の処理が表示-->
+        <?php if (isset($flagUserDelete)) {
+            echo $this->Html->link(__('Edit Event'), array('action' => 'edit', $event['Event']['id'])).'</br>';
+            echo $this->Form->postLink(__('Delete Event'), array('action' => 'delete', $event['Event']['id']), array(), __('Are you sure you want to delete # %s?', $event['Event']['id'])).'</br>';
+            }
+        ?>
+</div>
+

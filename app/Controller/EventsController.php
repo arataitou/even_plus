@@ -42,6 +42,10 @@ class EventsController extends AppController {
         }
         return parent::isAuthorized($user);
     }
+
+    public function beforeFilter() {
+        $this->Auth->allow('index');
+    }
 /**
  * index method
  *

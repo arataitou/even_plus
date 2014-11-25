@@ -336,6 +336,32 @@ class EventsController extends AppController {
     }
 
     public function join($id = null){
+        $this->Event->id = $id;
+
+        $options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
+        $eventInfo = $this->set('eventInfo', $this->Event->find('first', $options));
+
+        if (!$this->Event->exists()) {
+            throw new NotFoundException(__('Invalid event'));
+        }
+
+        if ($this->request->is('post')) {
+            $data = array(
+                "event_id" => $id,
+                //"user_id" => $this->Auth->user('id'); 参加者のuser_id挿入するべし
+                "answer_1" => $this->request->data['Participant']['answer_1'],
+                "answer_2" => $this->request->data['Participant']['answer_2'],
+                "answer_3" => $this->request->data['Participant']['answer_3'],
+                "status" => '1' //status = 1 を有効な参加者としている
+            );
+
+            $this->Participant->create();
+            if ($this->Participant->save($data)) {
+                $this->Session->setFlash(__('The event has been saved.'));
+            } else {
+                $this->Session->setFlash(__('The event could not be joined. Please, try again.'));
+            }
+        }
     }
 
     public function cancel($id = null){

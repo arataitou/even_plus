@@ -130,7 +130,7 @@ class Event extends AppModel {
 			'boolean' => array(
 				'rule' => array('boolean'),
 			),
-		),
+        ),
 	);
 
     public function isOwnedBy($event, $user) {

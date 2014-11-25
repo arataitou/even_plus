@@ -21,6 +21,10 @@ class EventsController extends AppController {
              'order' => array('created' => 'asc'),
         )
     );
+	public function beforeFilter() {
+		parent::beforeFilter();
+    	$this->Auth->allow('index');
+    }
 
 /**
  * Components
@@ -28,7 +32,7 @@ class EventsController extends AppController {
  * @var array
  */
     //ユーザ制限
-    public function isAuthorized($user){
+    public function isAuthorized($user) {
         //登録済みユーザは投稿できる。
         if ($this->action === 'add') {
             return true;

@@ -97,8 +97,8 @@ class Event extends AppModel {
             'bio' => array(
                 'rule' => array('between', 50, 300),
                 'message' => '50文字以上、300文字以下で入力して下さい。'
-                )
-            ),
+            )
+        ),
         'question_1' => array(
             'notEmpty' => array(
                 'rule' => array('notEmpty')

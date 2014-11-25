@@ -8,9 +8,9 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event', 'Category', 'Area');
+    public $uses = array('Event', 'Category', 'Area', 'User', 'Participants');
     public $helpers = array('Paginator');
-    public $components = array('Session','Paginator');
+    public $components = array('Session', 'Paginator');
     //Paginatorの設定
     public $paginate = array(
         //モデルの指定
@@ -50,7 +50,7 @@ class EventsController extends AppController {
     public function index() {
 
         $status=$this->Auth->user();
-        $this->set('status',$status);
+        $this->set('status', $status);
 
         $order = array(
                      'order' => 'event_date asc',
@@ -159,7 +159,8 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
         }
 		$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
-        $this->set('event', $this->Event->find('first', $options));
+        $event = $this->Event->find('first', $options);
+        $this->set('event', $event);
 
         //user_idからuser名を取れるように配列を操作してviewにぶちあげ
         $users = $this->User->find('all', array('fields' => array('id', 'name')));
@@ -187,16 +188,16 @@ class EventsController extends AppController {
             'conditions' => array('event_id' => $id)
             ));
         $this->set('participantsRandom', $participants);
-
-        /*
+        
         //login済みのユーザーだった場合「参加ボタン」を表示するため、viewにuser_idをset
-        if ($userId = $this->Auth->user('id')){
+        $userId = $this->Auth->user('id');
+        if ($userId) {
             $this->set('userId', $userId);
-            if ($userId == '1' || $this->Event->data["user_id"]){
-                $this->set('flagUd', "haveAuthority");
+            //管理者あるいは作成者だった場合削除リンクを表示表示する
+            if ($userId == '1' || $userId == $event['Event']['user_id']) {
+                $this->set('flagUserDelete', "haveAuthority");
             }
         }
-         */
     }
 /**
  * add method

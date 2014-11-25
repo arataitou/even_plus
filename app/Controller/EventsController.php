@@ -156,10 +156,20 @@ class EventsController extends AppController {
 			$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
 			$this->request->data = $this->Event->find('first', $options);
 		}
-        $this->set('categories', $this->Category->find('list',
-            array('fields' => array('Category.id', 'Category.category_title'))));
-        $this->set('areas', $this->Area->find('list',
-            array('fields' => array('Area.id', 'Area.area_name'))));
+        $this->set('categories', $this->Category->find(
+            'list',
+            array(
+                'fields' => array('Category.id', 'Category.category_title')
+                )
+            )
+        );
+        $this->set('areas', $this->Area->find(
+            'list',
+            array(
+                'fields' => array('Area.id', 'Area.area_name')
+                )
+            )
+        );
 	}
 /**
  * delete method

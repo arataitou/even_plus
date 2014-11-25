@@ -48,16 +48,6 @@
             echo $this->Html->link('Login', '/users/login', array('class'=>'button'));
             echo $this->Html->link('Signup','/users/signup', array('class'=>'button'));
         }
-		//Topのロゴ (/even_plus/top/index) へLink
-		echo '<a href='.'/even_plus/top/index'.'><h1>'."Even+".'</h1></a>';
-
-		//Button表示各ページへのLink
-		echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
-		echo $this->Html->link('Logout', '/users/logout', array('class'=>'button'));
-		echo $this->Html->link('Login', '/users/login', array('class'=>'button'));
-		echo $this->Html->link('Signup', '/users/Signup', array('class'=>'button'));
-		echo $this->Html->link('MakeEvent', '/events/add', array('class'=>'button'));
-		echo $this->Html->link('Event', '/events/index', array('class'=>'button'));
 	?>
 </head>
 <body>

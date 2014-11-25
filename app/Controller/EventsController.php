@@ -8,7 +8,7 @@ App::uses('AppController', 'Controller');
  * @property SessionComponent $Session
  */
 class EventsController extends AppController {
-    public $uses = array('Event','Category','Area');
+    public $uses = array('Event', 'Category', 'Area');
     public $helpers = array('Paginator');
     public $components = array('Session','Paginator');
     //Paginatorの設定
@@ -283,7 +283,7 @@ class EventsController extends AppController {
                 )
             )
         );
-        $this->set('areas',$this->Area->find(
+        $this->set('areas', $this->Area->find(
             'list',
             array(
                 'fields' => array('Area.id', 'Area.area_name')
@@ -303,6 +303,8 @@ class EventsController extends AppController {
 			throw new NotFoundException(__('Invalid event'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+            $data = array('id' => $id);
+            $this->Event->save($data); 
 			if ($this->Event->save($this->request->data)) {
 				$this->Session->setFlash(__('The event has been saved.'));
 				return $this->redirect(array('action' => 'index'));
@@ -313,6 +315,20 @@ class EventsController extends AppController {
 			$options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
 			$this->request->data = $this->Event->find('first', $options);
 		}
+        $this->set('categories', $this->Category->find(
+            'list',
+            array(
+                'fields' => array('Category.id', 'Category.category_title')
+                )
+            )
+        );
+        $this->set('areas', $this->Area->find(
+            'list',
+            array(
+                'fields' => array('Area.id', 'Area.area_name')
+                )
+            )
+        );
 	}
 /**
  * delete method
@@ -325,15 +341,19 @@ class EventsController extends AppController {
 		$this->Event->id = $id;
 		if (!$this->Event->exists()) {
 			throw new NotFoundException(__('Invalid event'));
-		}
-		$this->request->allowMethod('post', 'delete');
-		if ($this->Event->delete()) {
-			$this->Session->setFlash(__('The event has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
+        }
+		if ($this->request->is(array('post', 'put'))) {
+            $data = array('id' => $id, 'status' => '1');
+            $this->Event->save($data); 
+			if ($this->Event->save($this->request->data)) {
+				$this->Session->setFlash(__('The event has been deleted.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The event could not be deleted. Please, try again.'));
+			}
+		} 
     }
+
 
     public function join($id = null){
         $this->Event->id = $id;

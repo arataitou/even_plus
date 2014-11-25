@@ -57,7 +57,7 @@ class Event extends AppModel {
 			'between' => array(
 				'rule' => array('between', 5, 50),
 				'message' => 'Between 5 to 50 characters'),
-
+        ),
         //EventControllerでValidation
         'event_date' => array(
             'datetime' => array(

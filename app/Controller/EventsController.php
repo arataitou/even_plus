@@ -191,10 +191,10 @@ class EventsController extends AppController {
         
         //login済みのユーザーだった場合「参加ボタン」を表示するため、viewにuser_idをset
         $userId = $this->Auth->user('id');
-        if ($userId){
+        if ($userId) {
             $this->set('userId', $userId);
             //管理者あるいは作成者だった場合削除リンクを表示表示する
-            if ($userId == '1' || $userId == $event['Event']['user_id']){
+            if ($userId == '1' || $userId == $event['Event']['user_id']) {
                 $this->set('flagUserDelete', "haveAuthority");
             }
         }

@@ -36,6 +36,10 @@ class TopsController extends AppController {
         $data = $this->Paginator->paginate('Event');
         $this->set(compact('data'));
     }
+
+    public function beforeFilter() {
+        $this->Auth->allow('index');
+    }
 }
 
 

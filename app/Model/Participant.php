@@ -41,7 +41,6 @@ class Participant extends AppModel {
                 'message' => 'Between 0 to 100 characters.'
             ),
         ),
-           
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -70,7 +69,6 @@ class Participant extends AppModel {
                 'message' => 'Between 0 to 100 characters.'
             ),
         ),
-
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

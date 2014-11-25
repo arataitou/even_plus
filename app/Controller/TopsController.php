@@ -23,6 +23,11 @@ class TopsController extends AppController {
     );
 
     public function index(){
+        //Login user情報を取得
+        $status = $this->Auth->user();
+        $status['user_id'] = $status['id'];
+        $this->set('status', $status);
+
         $start = date('Y-m-d');
         $this->Paginator->settings = array(
             'Event' => array(

@@ -11,16 +11,6 @@ class EventsController extends AppController {
     public $uses = array('Event', 'Category', 'Area', 'User', 'Participants');
     public $helpers = array('Paginator');
     public $components = array('Session', 'Paginator');
-    //Paginatorの設定
-    public $paginate = array(
-        //モデルの指定
-        'Event' => array(
-             //ページに表示する数
-             'limit' => 3,
-             //並び順
-             'order' => array('created' => 'asc'),
-        )
-    );
 
 /**
  * Components

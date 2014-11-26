@@ -23,7 +23,7 @@ class EventsController extends AppController {
     );
 	public function beforeFilter() {
 		parent::beforeFilter();
-    	$this->Auth->allow('index');
+    	$this->Auth->allow('index', 'view');
     }
 
 /**
@@ -158,7 +158,9 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+    public function view($id = null) {
+        $status=$this->Auth->user();
+        $this->set('status', $status);
         if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
         }

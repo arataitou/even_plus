@@ -20,7 +20,7 @@ class EventsController extends AppController {
     //ユーザ制限
     public function isAuthorized($user){
         //登録済みユーザは投稿できる。
-        if ($this->action === 'add') {
+        if ($this->action === 'add' || 'join' || 'index' || 'cancel') {
             return true;
         }
         //投稿のオーナーは編集や削除ができる。

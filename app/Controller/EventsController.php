@@ -144,7 +144,10 @@ class EventsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+    public function view($id = null) {
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
         if (!$this->Event->exists($id)) {
 			throw new NotFoundException(__('Invalid event'));
         }
@@ -349,6 +352,9 @@ class EventsController extends AppController {
 
 
     public function join($id = null){
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
         $this->Event->id = $id;
 
         $options = array('conditions' => array('Event.' . $this->Event->primaryKey => $id));
@@ -378,6 +384,9 @@ class EventsController extends AppController {
     }
 
     public function cancel($id = null){
+        $status=$this->Auth->user();
+        $this->set('status',$status);
+
         $this->Event->id = $id;
         if (!$this->Event->exists($id)) {
             throw new NotFoundException(__('Invlid event'));

@@ -208,10 +208,11 @@ class EventsController extends AppController {
 
             if ($eventMonth == null || $eventDay == null || $eventYear == null || $eventHour == null || $eventMin == null || $eventMeridation = null) {
                 $this->Session->setFlash(__('日時をすべて選択してください'));//日時のValidation
-            }else{
+            } else {
                 //データベースに送る配列を形成
                 $data = array(
                     "event_title" => $this->request->data["Event"]["event_title"],
+                    "user_id" => $status['id'],
                     "event_date" => array(
                         "month" => $eventMonth,
                         "day" => $eventDay,
@@ -228,7 +229,8 @@ class EventsController extends AppController {
                     "event_detail" => $this->request->data["Event"]["event_detail"],
                     "question_1" => $this->request->data["Event"]["question_1"],
                     "question_2" => $this->request->data["Event"]["question_2"],
-                    "question_3" => $this->request->data["Event"]["question_3"]
+                    "question_3" => $this->request->data["Event"]["question_3"],
+                    "status" => '1'
                 );
     			$this->Event->create();
     			if ($this->Event->save($data)) {

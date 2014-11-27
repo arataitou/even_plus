@@ -23,16 +23,22 @@
 
 /** General Style Info **/
 body {
-	background: #bbbbbb;
 	color: #fff;
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
 }
-a {
-	color: #003d4c;
-	text-decoration: underline;
+a.button {
+	color: #333300;
+  background: #bbbbbb;
+	padding: 10px;
+	margin-right: 10px;
+	border-radius: 4px;
+	text-shadow: 0 1px 0 #fff;
+	text-decoration:none;
 	font-weight: bold;
+  font-size:140%;
+  margin:5px;
 }
 a:hover {
 	color: #367889;

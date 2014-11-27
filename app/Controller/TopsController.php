@@ -23,6 +23,8 @@ class TopsController extends AppController {
     );
 
     public function index(){
+        $status = $this->Auth->user();
+        $this->set('status', $status);
         $start = date('Y-m-d');
         $this->Paginator->settings = array(
             'Event' => array(

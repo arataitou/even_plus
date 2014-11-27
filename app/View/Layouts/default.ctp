@@ -27,7 +27,7 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 		//Topのロゴ (/even_plus/top/index) へLink
-		echo '<a href='.'/even_plus/tops/index'.'><h1>'."Even+".'</h1></a>';
+		echo '<h1>'.$this->Html->link('Even+', '/', array('class'=>'button')).'</h1>';
          if (isset($status['id']) && ($status['group_id'] == 1)) {
 		    //Button表示各ページへのLink
 		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));

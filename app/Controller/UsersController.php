@@ -74,12 +74,12 @@ class UsersController extends AppController {
                 case 'recent';
                     $this->Paginator->settings = $this->paginate;    
                     //Participant tableを次の条件でpaginate  ① loginUserId ② 参加フラグ③ today以降の日付
-                    $entryEvent = $this->paginate('Participant', array('Participant.user_id' => $status['id'], 'Participant.status' => 0, 'Event.event_date >' => $todayDate));
+                    $entryEvent = $this->paginate('Participant', array('Participant.user_id' => $status['id'], 'Participant.status' => 1, 'Event.event_date >' => $todayDate));
                     $this->set('entryEvent', $entryEvent);
                     //Participant tableを次の条件でfind('all')  ① loginUserId ② 参加フラグ③ today以前の日付
                     $entryEventPast = $this->Participant->find(
                         'all',
-                        array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 0, 'Event.event_date <' => $todayDate)));
+                        array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 1, 'Event.event_date <' => $todayDate)));
                     $this->set('entryEventPast', $entryEventPast);
                 break;
 
@@ -88,12 +88,12 @@ class UsersController extends AppController {
                     //Participant tableを次の条件でfind('all')  ① loginUserId ② 参加フラグ ③ today以降の日付
                     $entryEvent = $this->Participant->find(
                         'all',
-                        array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 0, 'Event.event_date >' => $todayDate)));
+                        array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 1, 'Event.event_date >' => $todayDate)));
                     $this->set('entryEvent', $entryEvent);
                
                     //Participant tableを次の条件でpaginate  ① loginUserId ② 参加フラグ③ today以前の日付
                     $this->Paginator->settings = $this->paginate;
-                    $entryEventPast = $this->paginate('Participant', array('Participant.user_id' => $status['id'], 'Participant.status' => 0, 'Event.event_date <' => $todayDate));
+                    $entryEventPast = $this->paginate('Participant', array('Participant.user_id' => $status['id'], 'Participant.status' => 1, 'Event.event_date <' => $todayDate));
                     $this->set('entryEventPast', $entryEventPast);
                 break;
             }
@@ -105,13 +105,13 @@ class UsersController extends AppController {
             //Participant tableを次の条件でfind('all')  ① loginUserId ② 参加フラグ ③ today以降の日付
             $entryEvent = $this->Participant->find(
                 'all', 
-                array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 0, 'Event.event_date >' => $todayDate)));
+                array('conditions' => array('Participant.user_id' => $status['id'], 'Participant.status' => 1, 'Event.event_date >' => $todayDate)));
             $this->set('entryEvent', $entryEvent);
             //Participant tableを次の条件でfind('all')  ① loginUserId ② 参加フラグ ③ today以前の日付
             $entryEventPast = $this->Participant->find(
                 'all', 
                 array(
-            'conditions' => array('Participant.user_id' => $status['id'], 'Participant.status'=>0, 'Event.event_date <' => $todayDate)));
+            'conditions' => array('Participant.user_id' => $status['id'], 'Participant.status'=>1, 'Event.event_date <' => $todayDate)));
             $this->set('entryEventPast', $entryEventPast);
     	}
     }

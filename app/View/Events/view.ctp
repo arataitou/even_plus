@@ -113,7 +113,7 @@
 
 <!--ログイン済みのユーザーのみ参加ボタン表示-->
         <?php if (isset($userId)) { 
-            echo $this->Html->link(__('Join Event'), array('action' => 'join')).'</br>'; 
+            echo $this->Html->link(__('Join Event'), array('action' => 'join', $event['Event']['id'])).'</br>'; 
             }
         ?>
 <!--管理者とイベント作成者のみ以下の処理が表示-->

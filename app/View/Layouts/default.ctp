@@ -16,6 +16,11 @@
 ?>
 <!DOCTYPE html>
 <html>
+<style>
+.logo a:hover {
+    color:#ddd;
+}
+</style>
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
@@ -27,7 +32,8 @@
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 		//Topのロゴ (/even_plus/top/index) へLink
-		echo '<h1>'.$this->Html->link('Even+', '/', array('class'=>'button')).'</h1>';
+		echo '<a href='.'/even_plus/tops/index'.' style="text-decoration:none;" ><h2 class="logo">
+            <Center><font size=9 color="#F1C40F" face="Zapfino">'.'Even+'.'</font></font></Center></h2></a>';
          if (isset($status['id']) && ($status['group_id'] == 1)) {
 		    //Button表示各ページへのLink
 		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));

@@ -31,9 +31,10 @@
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-		//Topのロゴ (/even_plus/top/index) へLink
-		echo '<a href='.'/even_plus/tops/index'.' style="text-decoration:none;" ><h2 class="logo">
-            <Center><font size=9 color="#F1C40F" face="Zapfino">'.'even+'.'</font></font></Center></h2></a>';
+        //Topのロゴ (/even_plus/top/index) へLink
+
+		echo '<h2 class="logo">
+            <Center><font size=9 color="#F1C40F" face="Zapfino">'.'even+'.'</font></font></Center></h2>';
          if (isset($status['id']) && ($status['group_id'] == 1)) {
 		    //Button表示各ページへのLink
 		    echo $this->Html->link('Mypage', '/users/index', array('class'=>'button'));
